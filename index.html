@@ -1,0 +1,1486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>HT-AIOS • MoveOps v11 MVP — Multi-Provider SaaS</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="version" content="v11-mvp-launchable" />
+  <style>
+    :root{
+      --bg:#0b1120;
+      --panel:#0f172a;
+      --card:#111827;
+      --text:#e5e7eb;
+      --muted:#9aa6bd;
+      --accent:#2E6CF6;
+      --accent-2:#22c55e;
+      --warn:#ef4444;
+      --border:#1f2937;
+      --chip:#0b1733;
+      --shadow: 0 6px 24px rgba(0,0,0,0.3);
+      --radius:12px;
+      --ok:#22c55e;
+      --late:#ef4444;
+      --warn2:#f59e0b;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0; padding:0; background:linear-gradient(180deg,#0b1120 0%, #0a132b 100%); color:var(--text); font-family:Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji"; }
+    header{position:sticky; top:0; background:rgba(10,19,43,0.9); backdrop-filter:saturate(120%) blur(8px); border-bottom:1px solid var(--border); z-index:10}
+    .nav{display:flex; align-items:center; gap:10px; padding:10px 14px; max-width:1200px; margin:0 auto}
+    .brand{font-weight:800; letter-spacing:0.2px}
+    .brand b{color:var(--accent)}
+    .version{color:var(--muted); font-size:12px; margin-right:8px}
+    .spacer{flex:1}
+    .pill{display:inline-flex; align-items:center; gap:8px; padding:6px 10px; background:var(--card); border:1px solid var(--border); border-radius:999px; font-size:12px; cursor:pointer; user-select:none}
+    .pill:hover{border-color:#274379}
+    .badge{display:inline-flex; align-items:center; padding:2px 8px; border-radius:999px; font-weight:600; background:#0c1b38; color:#cfe1ff; border:1px solid #1d3a77}
+    .seg{display:inline-flex; gap:6px; background:var(--card); border:1px solid var(--border); border-radius:999px; padding:4px}
+    .seg button{border:none; background:transparent; color:var(--muted); padding:6px 10px; border-radius:999px; cursor:pointer; font-weight:600}
+    .seg button.active{background:#102046; color:#e9f0ff}
+    main{max-width:1200px; margin:16px auto; padding:0 12px}
+    .grid{display:grid; grid-template-columns: 2fr 1fr; gap:16px}
+    .grid-ops{display:grid; grid-template-columns: 1fr; gap:16px}
+    @media (min-width: 1020px){ .grid-ops{grid-template-columns: 1fr 1fr} }
+    .card{background:linear-gradient(180deg,#0c1427 0,#0b1324 100%); border:1px solid var(--border); border-radius:var(--radius); box-shadow:var(--shadow)}
+    .card .hd{display:flex; align-items:center; justify-content:space-between; padding:12px 14px; border-bottom:1px solid var(--border)}
+    .card .bd{padding:12px 14px}
+    h3{margin:0; font-size:16px}
+    .row{display:flex; flex-wrap:wrap; gap:10px}
+    .col-12{flex:1 1 100%}
+    .col-6{flex:1 1 calc(50% - 10px)}
+    .col-4{flex:1 1 calc(33.33% - 10px)}
+    .col-3{flex:1 1 calc(25% - 10px)}
+    label{display:block; font-size:12px; color:var(--muted); margin-bottom:6px}
+    input,select,textarea{width:100%; background:#0a172f; border:1px solid var(--border); border-radius:10px; padding:10px 10px; outline:none; color:var(--text)}
+    input:focus, select:focus, textarea:focus{border-color:#2b4f99}
+    .tabs{display:flex; gap:6px; align-items:center}
+    .tabs .tab{padding:6px 10px; border:1px solid var(--border); background:#0a172f; border-radius:999px; color:#cfe1ff; font-size:12px}
+    .kpi{display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:8px}
+    .k{background:#0a172f; border:1px solid var(--border); border-radius:10px; padding:8px 10px; display:grid; gap:6px}
+    .split{display:flex; align-items:center; justify-content:space-between; gap:10px}
+    .mini{font-size:12px; color:var(--muted)}
+    .v{font-weight:800}
+    .actions{display:flex; gap:8px; flex-wrap:wrap}
+    .btn{background:linear-gradient(180deg,#2b5fe9,#1d45b6); border:none; color:#fff; padding:10px 12px; border-radius:10px; cursor:pointer; font-weight:700}
+    .btn:hover{filter:brightness(1.05)}
+    .btn.ghost{background:transparent; border:1px solid var(--border); color:#cfe1ff}
+    .btn.warn{background:linear-gradient(180deg,#ef4444,#b91c1c)}
+    .btn.ok{background:linear-gradient(180deg,#22c55e,#198c44)}
+    .list{display:grid; gap:8px}
+    .calendar{display:grid; grid-template-columns: repeat(7, 1fr); gap:8px}
+    .day{background:#0a172f; border:1px solid var(--border); border-radius:10px; min-height:110px; padding:8px; display:flex; flex-direction:column; gap:6px; position:relative}
+    .day .d{font-size:12px; color:#9bb0d1}
+    .job{background:#0b1733; border:1px solid #1a3670; border-radius:10px; padding:8px; font-size:12px; display:flex; flex-direction:column; gap:4px}
+    .job .route{color:#e6f0ff}
+    .job .meta{display:flex; gap:8px; color:#9bb0d1}
+    .risk-dot{width:8px; height:8px; border-radius:50%; display:inline-block; margin-left:6px}
+    .risk-ok{background:var(--ok)}
+    .risk-warn{background:var(--warn2)}
+    .risk-late{background:var(--late)}
+    .feed{display:grid; gap:6px; max-height:260px; overflow:auto}
+    .feed .evt{background:#0a172f; border:1px solid var(--border); border-radius:10px; padding:8px; font-size:12px}
+    .sop{display:grid; grid-template-columns: 1fr 1fr; gap:8px}
+    .cardlet{background:#0a172f; border:1px solid var(--border); border-radius:10px; padding:8px}
+    .calendar .cap{margin-top:auto; font-size:11px; color:#89a3d3}
+    .switch{display:flex; align-items:center; gap:8px}
+    .note{font-size:12px; color:#2E6CF6}
+    .toast { position: fixed; bottom: 16px; right: 16px; background: #fff; border: 1px solid var(--border); color: #111; padding: 10px 12px; border-radius: 10px; box-shadow: var(--shadow); font-size: 13px; display: none; }
+    .breakdown{display:grid; gap:6px; margin-top:8px}
+    .bdrow{display:flex; justify-content:space-between; font-size:12px; color:var(--muted)}
+    .bdrow strong{color:var(--text)}
+    .inline-actions{display:flex; gap:6px; flex-wrap:wrap}
+    .countdown{font-variant-numeric: tabular-nums}
+    hr{border:none; border-top:1px solid var(--border); margin:12px 0}
+    .provider-pill { display:flex; align-items:center; gap:8px }
+    .provider-pill .name{font-weight:600}
+    .provider-pill .status{border-color:#C9D6EA}
+    .provider-select { min-width: 260px; }
+    .hint{font-size:11px; color:#6b7ea3}
+    dialog{border:none; border-radius:12px; padding:0; width:min(820px, 92vw); background:#0b1427; color:#eaf1ff; border:1px solid #1b2d55}
+    .modal-hd{display:flex; align-items:center; justify-content:space-between; padding:12px 14px; border-bottom:1px solid var(--border)}
+    .modal-bd{padding:12px 14px}
+    .kv{display:flex; gap:8px; align-items:center}
+    .kv .label{color:#9bb0d1; font-size:12px}
+    footer{max-width:1200px; margin:20px auto; padding:12px; color:#89a3d3; font-size:12px; text-align:center}
+    .admin-grid{display:grid; grid-template-columns: 1fr 1fr; gap:12px}
+    .stat{background:#0a172f; border:1px solid var(--border); border-radius:10px; padding:10px; display:grid; gap:6px}
+    .danger{color:#ffcccc}
+  </style>
+  <script type="importmap">
+    {
+      "imports": {
+        "lit": "https://cdn.jsdelivr.net/npm/lit@3/+esm"
+      }
+    }
+  </script>
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <div class="brand">HT-AIOS • <b>MoveOps v11</b></div>
+      <span class="version">MVP • Multi-Provider</span>
+      <div class="pill provider-select" id="providerPill" title="Switch provider or create new"></div>
+      <div class="seg" id="citySeg"></div>
+      <div class="spacer"></div>
+      <div class="seg" id="viewSeg"></div>
+      <div class="pill" id="publicToggle"><span>Public mode</span><span class="badge" id="publicBadge">Off</span></div>
+      <div class="pill" id="seedBtn">Seed scenario</div>
+      <div class="pill" id="exportBtn" title="Download state JSON">Export</div>
+      <div class="pill" id="importBtn" title="Import state JSON">Import</div>
+      <input type="file" id="importFile" accept="application/json" style="display:none">
+      <div class="pill" id="resetStateBtn" title="Clear local data">Reset State</div>
+      <div class="pill" id="pingBtn" title="Simulate provider GPS ping">Ping location</div>
+    </div>
+  </header>
+
+  <main>
+    <div class="grid" id="appGrid">
+      <section class="card" id="quoteCard">
+        <div class="hd">
+          <h3>Customer Quote & Booking</h3>
+          <div class="tabs" id="zoneTabs"></div>
+        </div>
+        <div class="bd">
+          <div class="row" style="align-items:end; margin-bottom:8px">
+            <div class="col-4">
+              <label>Service</label>
+              <select id="service">
+                <option>Load Only</option>
+                <option selected>Pack & Load</option>
+                <option>U-Box</option>
+                <option>Specialty</option>
+              </select>
+            </div>
+            <div class="col-4">
+              <label>Date & Time</label>
+              <input type="datetime-local" id="when">
+            </div>
+            <div class="col-4">
+              <label>Origin address</label>
+              <input id="originAddress" placeholder="123 Main St, Gainesville">
+              <div class="hint">Zone computed from origin</div>
+            </div>
+
+            <div class="col-3">
+              <label>Origin stairs (flights)</label>
+              <select id="originStairs">
+                <option>0</option><option>1</option><option>2</option><option>3</option>
+              </select>
+            </div>
+            <div class="col-3">
+              <label>Destination address</label>
+              <input id="destAddress" placeholder="456 Oak Ave, Gainesville">
+            </div>
+            <div class="col-3">
+              <label>Destination stairs (flights)</label>
+              <select id="destStairs">
+                <option>0</option><option>1</option><option>2</option><option>3</option>
+              </select>
+            </div>
+            <div class="col-3">
+              <label>Site surcharge</label>
+              <select id="siteFee">
+                <option value="0">None</option>
+                <option value="25">Handling</option>
+                <option value="40">Elevator</option>
+                <option value="60">Long push</option>
+              </select>
+            </div>
+
+            <div class="col-3">
+              <label>Crew size</label>
+              <select id="crew">
+                <option>2</option><option>3</option><option>4</option>
+              </select>
+            </div>
+            <div class="col-3">
+              <label>Estimated hours</label>
+              <select id="hours">
+                <option>2</option><option selected>3</option><option>4</option><option>5</option><option>6</option>
+              </select>
+            </div>
+            <div class="col-3">
+              <label>Boxes</label>
+              <select id="boxes">
+                <option>0</option><option>10</option><option selected>20</option><option>30</option><option>40</option>
+              </select>
+            </div>
+            <div class="col-3">
+              <label>Add-ons</label>
+              <select id="addons" multiple size="3" title="Hold Ctrl/Cmd to multi-select">
+                <option value="packing">Packing assistance</option>
+                <option value="cleaning">Move-out cleaning</option>
+                <option value="insurance">Damage coverage</option>
+              </select>
+              <div class="hint">Optional: increase accuracy and upsell</div>
+            </div>
+
+            <div class="col-12">
+              <label>Contact info (for confirmation)</label>
+              <div class="row">
+                <div class="col-4"><input id="custName" placeholder="Full name"></div>
+                <div class="col-4"><input id="custPhone" placeholder="Phone"></div>
+                <div class="col-4"><input id="custEmail" placeholder="Email"></div>
+              </div>
+            </div>
+            <div class="col-12">
+              <label>Notes</label>
+              <textarea id="custNotes" rows="2" placeholder="Gate codes, parking, special items..."></textarea>
+            </div>
+          </div>
+
+          <div class="kpi">
+            <div class="k">
+              <div class="split"><span class="mini">Zone (origin)</span><span id="zoneName" class="badge">Core</span></div>
+              <div class="split"><span class="mini">ETA confidence</span><span id="etaConf" class="badge">High</span></div>
+              <div class="split"><span class="mini">Pseudo-distance</span><span id="distMi">0.0 mi</span></div>
+            </div>
+            <div class="k">
+              <div class="split"><span class="mini">Base</span><span id="kBase" class="v">$0</span></div>
+              <div class="split"><span class="mini">Fees</span><span id="kFees">$0</span></div>
+              <div class="split"><span class="mini">Deposit</span><span id="kDeposit" class="badge">$0</span></div>
+            </div>
+          </div>
+
+          <div class="breakdown" id="breakdown">
+            <div class="bdrow"><span>Base</span><strong id="bdBase">$0</strong></div>
+            <div class="bdrow"><span>Travel (origin zone)</span><strong id="bdZoneFees">$0</strong></div>
+            <div class="bdrow"><span>Stairs (O + D)</span><strong id="bdStairs">$0</strong></div>
+            <div class="bdrow"><span>Mileage add-on</span><strong id="bdMileage">$0</strong></div>
+            <div class="bdrow"><span>Site/Boxes</span><strong id="bdSiteBoxes">$0</strong></div>
+            <div class="bdrow"><span>Add-ons</span><strong id="bdAddons">$0</strong></div>
+            <div class="bdrow"><span>Deposit rules</span><strong id="bdDepPct">—</strong></div>
+          </div>
+
+          <div class="split" style="margin-top:12px">
+            <div class="actions">
+              <button class="btn" id="recalcBtn">Recalculate</button>
+              <button class="btn" id="shareBtn">Share Quote</button>
+              <button class="btn" id="holdBtn">Create Hold</button>
+              <button class="btn ok" id="bookBtn">Book & Pay</button>
+              <button class="btn ghost" id="resetBtn">Reset</button>
+            </div>
+            <div class="inline-actions">
+              <span class="mini">Total:</span>
+              <span id="kTotal" class="badge" style="margin-left:6px">$0</span>
+              <span class="mini">Remaining capacity</span>
+              <span id="capBadge" class="badge">—</span>
+            </div>
+          </div>
+          <div class="hint" id="noHidden">No hidden fees — what you see is what you pay. Deposit due now, balance at job end.</div>
+        </div>
+      </section>
+
+      <aside class="card" id="customerCard">
+        <div class="hd">
+          <h3>Customer Preview</h3>
+          <span class="badge" id="custStatus">Draft</span>
+        </div>
+        <div class="bd">
+          <div class="list" style="margin-bottom:10px">
+            <div class="split"><span class="mini">Estimated Total</span><span id="custTotal" class="v">$0</span></div>
+            <div class="split"><span class="mini">Deposit Due</span><span id="custDeposit" class="badge">$0</span></div>
+            <div class="split"><span class="mini">Window</span><span id="custETA">10:00–12:00</span></div>
+            <div class="split"><span class="mini">Confidence</span><span id="custConf" class="badge">High</span></div>
+          </div>
+          <div class="sop">
+            <div class="cardlet">
+              <div class="mini">Status</div>
+              <div id="custStage" style="font-weight:700">Hold</div>
+            </div>
+            <div class="cardlet">
+              <div class="mini">Balance</div>
+              <div id="custBalance" style="font-weight:700">$0</div>
+            </div>
+          </div>
+          <hr>
+          <div class="mini">Trip</div>
+          <div class="list">
+            <div class="mini" id="custTrip">—</div>
+            <div class="mini" id="custStairs">Stairs: —</div>
+            <div class="mini" id="custAddons">Add-ons: —</div>
+            <div class="mini" id="custDepositNote">Deposit policy: —</div>
+            <div class="mini" id="custContact">Contact: —</div>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <div class="grid-ops" style="margin-top:16px">
+      <section class="card">
+        <div class="hd">
+          <h3>Operations Console</h3>
+          <div class="split" style="gap:10px">
+            <span class="mini">Week view</span>
+            <span class="mini">Provider:</span><span class="badge" id="activeSlug">—</span>
+            <span class="mini">Last ping:</span><span class="badge" id="lastPingBadge">—</span>
+            <span class="mini">Evaluator:</span><span class="badge" id="evalBadge">On</span>
+            <button class="btn ghost" id="toggleEvalBtn">Toggle</button>
+          </div>
+        </div>
+        <div class="bd">
+          <div class="calendar" id="calendar"></div>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="hd">
+          <h3>Jobs & Feeds</h3>
+          <div class="switch"><input type="checkbox" id="queueToggle"><span class="mini">Show queues</span></div>
+        </div>
+        <div class="bd">
+          <div class="list" id="jobsList"></div>
+          <hr>
+          <div class="list" id="verifyList" style="display:none"></div>
+          <div class="list" id="balancesList" style="display:none; margin-top:8px"></div>
+          <hr>
+          <div class="feed" id="ownerFeed"></div>
+        </div>
+      </section>
+    </div>
+
+    <section class="card" style="margin-top:16px" id="adminPanel">
+      <div class="hd">
+        <h3>Admin • Provider Settings & Policies</h3>
+        <div class="split" style="gap:8px">
+          <span class="mini">Guardrails: floors, caps, blackout</span>
+          <button class="btn ghost" id="addBlackoutBtn">Add Blackout</button>
+        </div>
+      </div>
+      <div class="bd">
+        <div class="admin-grid">
+          <div class="stat">
+            <div class="mini">Pricing (per active provider)</div>
+            <div class="row">
+              <div class="col-4"><label>Base/hr/mover</label><input id="admBase" type="number"></div>
+              <div class="col-4"><label>Stairs/flight</label><input id="admStairs" type="number"></div>
+              <div class="col-4"><label>Box fee each</label><input id="admBox" type="number"></div>
+              <div class="col-4"><label>Mileage rate</label><input id="admMileage" type="number" step="0.1"></div>
+            </div>
+            <div class="row">
+              <div class="col-4"><label>Deposit %</label><input id="admDepPct" type="number" step="0.01"></div>
+              <div class="col-4"><label>Deposit min</label><input id="admDepMin" type="number"></div>
+              <div class="col-4"><label>Deposit cap</label><input id="admDepCap" type="number"></div>
+            </div>
+            <div class="row">
+              <div class="col-4"><label>Daily hours capacity</label><input id="admDailyHrs" type="number"></div>
+              <div class="col-4"><label>Crew slots</label><input id="admCrew" type="number"></div>
+            </div>
+            <div class="split">
+              <div class="mini">Payment methods update affects Book & Pay modal.</div>
+              <button class="btn" id="savePricingBtn">Save Settings</button>
+            </div>
+          </div>
+
+          <div class="stat">
+            <div class="mini">Payment Methods</div>
+            <div class="row">
+              <div class="col-6"><label>Methods (comma separated)</label><input id="admPayMethods" placeholder="Card (test),Cash,Venmo,Zelle"></div>
+              <div class="col-6"><label>Hold minutes</label><input id="admHoldMin" type="number"></div>
+            </div>
+            <div class="row">
+              <div class="col-4"><label>Venmo</label><input id="admVenmo" placeholder="@handle"></div>
+              <div class="col-4"><label>CashApp</label><input id="admCash" placeholder="$handle"></div>
+              <div class="col-4"><label>Zelle</label><input id="admZelle" placeholder="email@bank"></div>
+            </div>
+            <div class="split">
+              <div class="mini">Manual verification on by default.</div>
+              <button class="btn" id="savePaymentBtn">Save Payments</button>
+            </div>
+          </div>
+
+          <div class="stat">
+            <div class="mini">Guardrails</div>
+            <div class="row">
+              <div class="col-6"><label>Pricing floor (min total)</label><input id="admFloor" type="number" value="0"></div>
+              <div class="col-6"><label>Max jobs per day</label><input id="admMaxJobs" type="number" value="20"></div>
+            </div>
+            <div class="row">
+              <div class="col-12"><label>Blackout dates (CSV YYYY-MM-DD)</label><input id="admBlackouts" placeholder="2025-07-04,2025-12-25"></div>
+            </div>
+            <div class="split">
+              <div class="mini">Blocks booking on blackout days and floors cheap quotes.</div>
+              <button class="btn" id="saveGuardsBtn">Save Guardrails</button>
+            </div>
+          </div>
+
+          <div class="stat">
+            <div class="mini">Analytics (active provider)</div>
+            <div id="admAnalytics"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <dialog id="payModal">
+    <div class="modal-hd">
+      <strong>Book & Pay</strong>
+      <button class="btn ghost" id="closePay">Close</button>
+    </div>
+    <div class="modal-bd">
+      <div class="row">
+        <div class="col-6">
+          <label>Payment method</label>
+          <select id="payMethod"></select>
+        </div>
+        <div class="col-6">
+          <label>Deposit amount</label>
+          <input id="payAmount" />
+        </div>
+        <div class="col-12">
+          <div class="note" id="payNote">Use test card 4242 4242 4242 4242 (simulated). No network calls.</div>
+          <div class="mini" id="handleLine">Official handles shown for manual payments.</div>
+          <div class="kv"><span class="label">Handle:</span><span id="handleVal">—</span></div>
+          <div class="kv"><span class="label">Memo:</span><span id="memoVal">—</span></div>
+          <div class="kv"><span class="label">Hold expires:</span><span id="holdExpireVal" class="countdown">—</span></div>
+        </div>
+      </div>
+      <div class="split">
+        <div class="inline-actions">
+          <button class="btn" id="paySim">Simulate Payment</button>
+          <button class="btn warn" id="holdOnly">Create Hold (no payment)</button>
+          <button class="btn ghost" id="iPaid">I sent payment</button>
+        </div>
+        <div><span class="mini">Due now</span> <span class="badge" id="dueNow">$0</span></div>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog id="providerModal">
+    <div class="modal-hd">
+      <strong>Switch or Create Provider</strong>
+      <button class="btn ghost" id="closeProv">Close</button>
+    </div>
+    <div class="modal-bd" id="provBody"></div>
+  </dialog>
+
+  <div class="toast" id="toast"></div>
+
+  <footer>
+    HT-AIOS / Thoroughbred-OS • v11 MVP Launchable • Multi-Provider Engine • Local-first demo (no external assets)
+  </footer>
+
+  <script type="module">
+    // HT-AIOS MoveOps v11 MVP - Launchable, customer-ready demo
+
+    const DBKEY = 'moveops_v11';
+    const DB = {
+      load() {
+        const raw = localStorage.getItem(DBKEY);
+        if (!raw) return null;
+        try { return JSON.parse(raw); } catch { return null; }
+      },
+      save(state) {
+        localStorage.setItem(DBKEY, JSON.stringify(state));
+      },
+      clear() {
+        localStorage.removeItem(DBKEY);
+      }
+    };
+
+    const defaultProviders = () => ([
+      {
+        id: crypto.randomUUID(),
+        slug: 'gvl-movers',
+        name: 'Gainesville Movers Co.',
+        city: 'Gainesville, FL',
+        zones: [
+          { id:'core', name:'Core', travelFee: 25 },
+          { id:'ring', name:'Ring', travelFee: 45 },
+          { id:'far', name:'Far', travelFee: 75 }
+        ],
+        pricing: {
+          basePerHourPerMover: 45,
+          boxFeeEach: 1.2,
+          stairsPerFlight: 10,
+          mileageRate: 1.0,
+          depositPct: 0.2,
+          depositMin: 50,
+          depositCap: 300
+        },
+        addOns: { packing: 40, cleaning: 85, insurance: 35 },
+        capacity: { crew: 8, dailyHours: 24 },
+        payment: {
+          methods: ['Card (test)','Cash','Venmo','Zelle'],
+          requireDeposit: true,
+          depositPct: 0.2,
+          minDeposit: 50,
+          depositCap: 300,
+          verifyManual: true,
+          holdMinutes: 60
+        },
+        handles: {
+          venmo: '@HughesTransportation',
+          cashapp: '$HughesTransportation',
+          zelle: 'pay@hughes.local',
+          notes: 'Pay only official handles.'
+        },
+        ops: {
+          lastKnownLocation: null,
+          lastPingAt: null,
+          thresholds: {
+            departLead: { core: 30, ring: 45, far: 75 },
+            buffer: 20,
+            grace: 15,
+            cooldown: 30
+          }
+        },
+        policies: {
+          floorTotal: 0,
+          maxJobsPerDay: 20,
+          blackoutDates: []
+        }
+      },
+      {
+        id: crypto.randomUUID(),
+        slug: 'jax-river',
+        name: 'River City Haulers',
+        city: 'Jacksonville, FL',
+        zones: [
+          { id:'core', name:'Core', travelFee: 35 },
+          { id:'ring', name:'Ring', travelFee: 55 },
+          { id:'far', name:'Far', travelFee: 90 }
+        ],
+        pricing: {
+          basePerHourPerMover: 42,
+          boxFeeEach: 1.0,
+          stairsPerFlight: 9,
+          mileageRate: 0.9,
+          depositPct: 0.18,
+          depositMin: 40,
+          depositCap: 250
+        },
+        addOns: { packing: 35, cleaning: 80, insurance: 30 },
+        capacity: { crew: 12, dailyHours: 40 },
+        payment: {
+          methods: ['Card (test)','Cash','Venmo'],
+          requireDeposit: true,
+          depositPct: 0.18,
+          minDeposit: 40,
+          depositCap: 250,
+          verifyManual: true,
+          holdMinutes: 45
+        },
+        handles: { venmo: '@RiverCity', cashapp: '$RiverCity', zelle: 'pay@river.local', notes:'Official handles only' },
+        ops: {
+          lastKnownLocation: null, lastPingAt: null,
+          thresholds: { departLead:{core:30,ring:45,far:75}, buffer:20, grace:15, cooldown:30 }
+        },
+        policies: { floorTotal: 0, maxJobsPerDay: 30, blackoutDates: [] }
+      }
+    ]);
+
+    const initialState = () => ({
+      providers: defaultProviders(),
+      activeProviderId: null,
+      publicMode: false,
+      cityFilter: 'All',
+      view: 'Quote',
+      jobs: [],
+      feeds: [],
+      seedVersion: 0,
+      evaluatorOn: true
+    });
+
+    let state = DB.load() || initialState();
+    if (!state.activeProviderId) state.activeProviderId = state.providers[0].id;
+
+    const $ = sel => document.querySelector(sel);
+    const el = (tag, cls, text) => {
+      const n = document.createElement(tag);
+      if (cls) n.className = cls;
+      if (text !== undefined) n.textContent = text;
+      return n;
+    };
+    const money = n => `$${Number(n||0).toFixed(2)}`;
+    const clamp = (v,min,max)=>Math.max(min,Math.min(max,v));
+    const todayISO = () => new Date().toISOString().slice(0,10);
+    function sameDay(a,b){
+      const d = (t)=> new Date(t);
+      const x=d(a), y=d(b);
+      return x.getFullYear()===y.getFullYear() && x.getMonth()===y.getMonth() && x.getDate()===y.getDate();
+    }
+    function toast(msg, ms=1800){
+      const t = $('#toast');
+      t.textContent = msg;
+      t.style.display = 'block';
+      setTimeout(()=> t.style.display='none', ms);
+    }
+    function fmtTime(ms){
+      if (!ms) return '—';
+      try{ return new Date(ms).toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});}catch{return '—'}
+    }
+    function hash(s){ return [...(s||'')].reduce((a,c)=> (a*31 + c.charCodeAt(0))>>>0, 0); }
+
+    function pseudoDistance(origin, dest) {
+      const h = s => [...(s||'')].reduce((a,c)=> (a*31 + c.charCodeAt(0))>>>0, 0);
+      const ox = (h(origin)+17)%100, oy = (h(origin)+97)%100;
+      const dx = (h(dest)+53)%100, dy = (h(dest)+199)%100;
+      const dist = Math.hypot(dx-ox, dy-oy) * 0.35;
+      return Math.round(dist*10)/10;
+    }
+    function zoneFromOrigin(origin, prov){
+      const z = prov.zones;
+      if (!origin || origin.trim().length < 4) return z[0];
+      const h = origin.toLowerCase();
+      if (h.includes('oak') || h.includes('nw') || h.includes('ring')) return z[1] || z[0];
+      if (h.includes('county') || h.includes('farm') || h.includes('far')) return z[2] || z[0];
+      return z[0];
+    }
+    function activeProvider(){
+      return state.providers.find(p=>p.id===state.activeProviderId) || state.providers[0];
+    }
+
+    function readAddons(){
+      const sel = $('#addons');
+      return [...sel.selectedOptions].map(o=>o.value);
+    }
+    function addonTotal(ids, provider){
+      const m = provider.addOns || {};
+      return (ids||[]).reduce((s,id)=> s + (m[id]||0), 0);
+    }
+    function calcDeposit(total, provider){
+      const p = provider.payment || {};
+      const pr = provider.pricing||{};
+      const pct = (p.depositPct ?? pr.depositPct ?? 0.2);
+      const minD = p.minDeposit ?? pr.depositMin ?? 0;
+      const capD = p.depositCap ?? pr.depositCap ?? Infinity;
+      const raw = total * pct;
+      return clamp(raw, minD, capD);
+    }
+
+    function isBlackout(dateISO, provider){
+      const list = provider.policies?.blackoutDates || [];
+      return list.includes(dateISO);
+    }
+    function maxJobsReached(dateISO, provider){
+      const max = provider.policies?.maxJobsPerDay || Infinity;
+      const count = state.jobs.filter(j=> j.providerId===provider.id && (j.when||'').slice(0,10)===dateISO).length;
+      return count >= max;
+    }
+
+    function computeQuote(input, provider){
+      const pr = provider.pricing;
+      const zone = zoneFromOrigin(input.originAddress, provider);
+      const crew = Number(input.crew||2);
+      const hours = Number(input.hours||3);
+      let base = pr.basePerHourPerMover * crew * hours;
+
+      const stairsFlights = Number(input.originStairs||0) + Number(input.destStairs||0);
+      const stairsFee = stairsFlights * pr.stairsPerFlight * crew;
+
+      const boxes = Number(input.boxes||0);
+      const boxFee = boxes * pr.boxFeeEach;
+
+      const siteFee = Number(input.siteFee||0);
+
+      const dist = pseudoDistance(input.originAddress, input.destAddress);
+      const mileageAddon = dist > 10 ? (dist-10) * pr.mileageRate : 0;
+
+      const travel = zone.travelFee;
+      const addonsSel = readAddons();
+      const addonsFee = addonTotal(addonsSel, provider);
+
+      const fees = travel + stairsFee + mileageAddon + siteFee + boxFee + addonsFee;
+      let total = base + fees;
+
+      const floor = provider.policies?.floorTotal || 0;
+      if (total < floor) total = floor;
+
+      const deposit = calcDeposit(total, provider);
+      const depPctEff = Math.round(((provider.payment?.depositPct ?? pr.depositPct) || 0.2)*100);
+
+      return {
+        zone, base, travel, stairsFee, mileageAddon,
+        boxSite: siteFee + boxFee,
+        addonsFee, fees, total, deposit,
+        depositPct: depPctEff/100,
+        depPctText: `${depPctEff}% (min ${money(provider.payment?.minDeposit ?? pr.depositMin ?? 0)}, cap ${money(provider.payment?.depositCap ?? pr.depositCap ?? Infinity)})`,
+        distanceMi: dist,
+        addonsSel
+      };
+    }
+
+    function remainingCapacity(provider, jobs){
+      const today = todayISO();
+      const dayJobs = jobs.filter(j=> (j.when||'').slice(0,10)===today && j.providerId===provider.id);
+      const usedHours = dayJobs.reduce((a,j)=> a + Number(j.hours||3) * Number(j.crew||2), 0);
+      const cap = provider.capacity.dailyHours * provider.capacity.crew;
+      return clamp(cap - usedHours, 0, cap);
+    }
+
+    function feed(providerId, msg, level){
+      state.feeds.push({ id: crypto.randomUUID(), providerId, at: Date.now(), msg, level });
+    }
+
+    function renderProviderPill(){
+      const prov = activeProvider();
+      const pill = $('#providerPill');
+      pill.innerHTML = '';
+      const wrap = el('div','provider-pill');
+      const dot = el('span','badge status','Active');
+      const nm = el('span','name',prov.name);
+      const city = el('span','mini',`• ${prov.city}`);
+      wrap.append(nm, city, dot);
+      pill.append(wrap);
+      pill.onclick = openProviderModal;
+      $('#activeSlug').textContent = prov.slug;
+      $('#lastPingBadge').textContent = prov.ops?.lastPingAt ? new Date(prov.ops.lastPingAt).toLocaleTimeString() : 'never';
+      $('#evalBadge').textContent = state.evaluatorOn ? 'On' : 'Off';
+    }
+    function renderCitySeg(){
+      const seg = $('#citySeg');
+      seg.innerHTML = '';
+      const cities = [...new Set(state.providers.map(p=>p.city))];
+      ['All', ...cities].forEach(c=>{
+        const text = c.replace(', FL','');
+        const b = el('button', state.cityFilter===c?'active':'', text);
+        b.onclick = () => { state.cityFilter = c; saveAndRender(); };
+        seg.append(b);
+      });
+    }
+    function renderViewSeg(){
+      const seg = $('#viewSeg');
+      seg.innerHTML = '';
+      ['Quote','Ops','Admin'].forEach(name=>{
+        const b = el('button', state.view===name?'active':'', name);
+        b.onclick = ()=> { state.view = name; saveAndRender(); };
+        seg.append(b);
+      });
+    }
+    function renderZoneTabs(){
+      const prov = activeProvider();
+      const tabs = $('#zoneTabs');
+      tabs.innerHTML = '';
+      prov.zones.forEach(z=>{
+        const t = el('span','tab', `${z.name} • ${money(z.travelFee)}`);
+        tabs.append(t);
+      });
+      const note = el('span','note','Pricing based on origin zone • No hidden fees');
+      note.style.marginLeft = '8px';
+      tabs.append(note);
+    }
+
+    function readQuoteInputs(){
+      return {
+        service: $('#service').value,
+        when: $('#when').value,
+        originAddress: $('#originAddress').value,
+        originStairs: $('#originStairs').value,
+        destAddress: $('#destAddress').value,
+        destStairs: $('#destStairs').value,
+        siteFee: $('#siteFee').value,
+        crew: $('#crew').value,
+        hours: $('#hours').value,
+        boxes: $('#boxes').value,
+        addons: readAddons(),
+        custName: $('#custName').value,
+        custPhone: $('#custPhone').value,
+        custEmail: $('#custEmail').value,
+        custNotes: $('#custNotes').value
+      };
+    }
+
+    function renderQuote(){
+      const prov = activeProvider();
+      const inp = readQuoteInputs();
+
+      const dateISO = (inp.when||'').slice(0,10);
+      if (dateISO && isBlackout(dateISO, prov)){
+        $('#custStatus').textContent = 'Blackout';
+        $('#custStatus').classList.add('danger');
+      } else {
+        $('#custStatus').textContent = 'Draft';
+        $('#custStatus').classList.remove('danger');
+      }
+
+      const q = computeQuote(inp, prov);
+
+      $('#zoneName').textContent = q.zone.name;
+      $('#distMi').textContent = `${q.distanceMi.toFixed(1)} mi`;
+      $('#etaConf').textContent = q.distanceMi > 25 ? 'Low' : (q.distanceMi > 12 ? 'Medium' : 'High');
+      $('#kBase').textContent = money(q.base);
+      $('#kFees').textContent = money(q.fees);
+      $('#kDeposit').textContent = money(q.deposit);
+      $('#kTotal').textContent = money(q.total);
+
+      $('#bdBase').textContent = money(q.base);
+      $('#bdZoneFees').textContent = money(q.travel);
+      $('#bdStairs').textContent = money(q.stairsFee);
+      $('#bdMileage').textContent = money(q.mileageAddon);
+      $('#bdSiteBoxes').textContent = money(q.boxSite);
+      $('#bdAddons').textContent = money(q.addonsFee);
+      $('#bdDepPct').textContent = `${Math.round(q.depositPct*100)}% • ${q.depPctText}`;
+
+      $('#custTotal').textContent = money(q.total);
+      $('#custDeposit').textContent = money(q.deposit);
+      $('#custConf').textContent = $('#etaConf').textContent;
+      $('#custTrip').textContent = `${inp.originAddress || 'Origin?'} → ${inp.destAddress || 'Destination?'}`;
+      $('#custStairs').textContent = `Stairs: O${inp.originStairs||0} + D${inp.destStairs||0}`;
+      $('#custAddons').textContent = `Add-ons: ${(q.addonsSel && q.addonsSel.length)? q.addonsSel.join(', '): 'None'}`;
+      $('#custDepositNote').textContent = `Deposit: ${q.depPctText}`;
+      $('#custContact').textContent = `Contact: ${inp.custName||'—'} • ${inp.custPhone||'—'} • ${inp.custEmail||'—'}`;
+      $('#dueNow').textContent = money(q.deposit);
+
+      const rem = remainingCapacity(prov, state.jobs);
+      $('#capBadge').textContent = `${rem} crew-hrs`;
+    }
+
+    function renderCalendar(){
+      const cal = $('#calendar');
+      cal.innerHTML = '';
+      const start = new Date();
+      const days = [...Array(7)].map((_,i)=> new Date(start.getFullYear(), start.getMonth(), start.getDate()+i));
+      days.forEach(d=>{
+        const cell = el('div','day');
+        const label = el('div','d', d.toLocaleDateString(undefined,{weekday:'short', month:'short', day:'numeric'}));
+        cell.append(label);
+        const jobs = state.jobs.filter(j => j.providerId===state.activeProviderId && (j.when||'').slice(0,10) === d.toISOString().slice(0,10));
+        jobs.forEach(j=>{
+          const jb = el('div','job');
+          const stairIcon = '⇧'.repeat(Math.max(1, (Number(j.originStairs)+Number(j.destStairs))||0)).slice(0,3);
+          const riskDot = el('span','risk-dot ' + (j.risk?.level==='late'?'risk-late': j.risk?.level==='warn'?'risk-warn':'risk-ok'));
+          const route = el('div','route', `${j.pickup||'Origin'} → ${j.dropoff||'Dest'}`);
+          route.append(riskDot);
+          jb.append(
+            route,
+            el('div','meta', `${j.crew} crew • ${j.hours}h • ${j.zoneName}`),
+            el('div','meta', `⇧ ${stairIcon} • ${money(j.total)} • depart by ${fmtTime(j.timing?.departBy)}`)
+          );
+          cell.append(jb);
+        });
+        const cap = remainingCapacity(activeProvider(), state.jobs.filter(j=> (j.when||'').slice(0,10)===d.toISOString().slice(0,10)));
+        const capEl = el('div','cap', `Remaining: ${cap} crew-hrs`);
+        cell.append(capEl);
+        cal.append(cell);
+      });
+    }
+
+    function renderJobs(){
+      const list = $('#jobsList');
+      list.innerHTML = '';
+      const prov = activeProvider();
+      const filterCity = state.cityFilter;
+      const jobs = state.jobs.filter(j=> j.providerId===prov.id && (filterCity==='All' || prov.city===filterCity));
+      if (jobs.length===0){
+        list.append(el('div','mini','No jobs yet. Create a hold or book to populate.'));
+        return;
+      }
+      jobs.slice().reverse().forEach(j=>{
+        const item = el('div','job');
+        const stairStr = `O${j.originStairs}+D${j.destStairs}`;
+        const riskDot = el('span','risk-dot ' + (j.risk?.level==='late'?'risk-late': j.risk?.level==='warn'?'risk-warn':'risk-ok'));
+        const etaText = j.timing?.etaMin!=null ? `ETA ${Math.round(j.timing.etaMin)}m` : 'ETA —';
+        item.append(
+          el('div','route', `${j.pickup} → ${j.dropoff}`),
+          el('div','meta', `${j.crew} crew • ${j.hours}h • ${j.zoneName} • ${stairStr}`),
+          el('div','meta', `${new Date(j.when).toLocaleString()} • ${money(j.total)} • ${j.status} • depart by ${fmtTime(j.timing?.departBy)}`)
+        );
+        item.querySelector('.route').append(riskDot);
+        const etaRow = el('div','meta', etaText);
+        const contactRow = el('div','meta', `Cust: ${j.customer?.name||'—'} • ${j.customer?.phone||'—'} • ${j.customer?.email||'—'}`);
+        item.append(etaRow, contactRow);
+        list.append(item);
+      });
+      renderQueues();
+    }
+
+    function renderFeed(){
+      const feed = $('#ownerFeed');
+      feed.innerHTML = '';
+      const prov = activeProvider();
+      state.feeds.filter(f=> f.providerId===prov.id).slice(-120).reverse().forEach(f=>{
+        const e = el('div','evt');
+        const level = f.level ? ` [${f.level}]` : '';
+        e.textContent = `[${new Date(f.at).toLocaleTimeString()}]${level} ${f.msg}`;
+        feed.append(e);
+      });
+    }
+
+    function renderQueues(){
+      const show = $('#queueToggle').checked;
+      $('#verifyList').style.display = show? '' : 'none';
+      $('#balancesList').style.display = show? '' : 'none';
+      if (!show) return;
+
+      const prov = activeProvider();
+      const verify = state.jobs.filter(j=> j.providerId===prov.id && j.status==='Hold:Unverified');
+      const bal = state.jobs.filter(j=> j.providerId===prov.id && j.status==='Booked' && sameDay(j.when, new Date()));
+
+      const vList = $('#verifyList'); vList.innerHTML='';
+      if (verify.length===0) vList.append(el('div','mini','No deposits pending verification.'));
+      verify.forEach(j=>{
+        const row = el('div','job');
+        row.append(
+          el('div','route', `${j.pickup} → ${j.dropoff}`),
+          el('div','meta', `Hold expires ${fmtTime(j.hold?.expiresAt)} • Deposit ${money(j.deposit)}`)
+        );
+        const act = el('div','inline-actions');
+        const bV = el('button','btn ok','Verify');
+        bV.onclick = ()=> verifyDeposit(j.id);
+        const bC = el('button','btn warn','Cancel');
+        bC.onclick = ()=> cancelHold(j.id);
+        act.append(bV,bC);
+        row.append(act);
+        vList.append(row);
+      });
+
+      const bList = $('#balancesList'); bList.innerHTML='';
+      if (bal.length===0) bList.append(el('div','mini','No balances due today.'));
+      bal.forEach(j=>{
+        const row = el('div','job');
+        row.append(
+          el('div','route', `${j.pickup} → ${j.dropoff}`),
+          el('div','meta', `Remaining ${money(Math.max(0, j.total - (j.paidAmount||0)))} • Window ${new Date(j.when).toLocaleTimeString()}`)
+        );
+        const act = el('div','inline-actions');
+        const done = el('button','btn ok','Mark collected');
+        done.onclick = ()=> markCompleted(j.id);
+        act.append(done);
+        row.append(act);
+        bList.append(row);
+      });
+    }
+
+    function renderAdmin(){
+      const prov = activeProvider();
+      $('#admBase').value = prov.pricing.basePerHourPerMover;
+      $('#admStairs').value = prov.pricing.stairsPerFlight;
+      $('#admBox').value = prov.pricing.boxFeeEach;
+      $('#admMileage').value = prov.pricing.mileageRate;
+      $('#admDepPct').value = prov.payment?.depositPct ?? prov.pricing.depositPct ?? 0.2;
+      $('#admDepMin').value = prov.payment?.minDeposit ?? prov.pricing.depositMin ?? 0;
+      $('#admDepCap').value = prov.payment?.depositCap ?? prov.pricing.depositCap ?? 999;
+      $('#admDailyHrs').value = prov.capacity.dailyHours;
+      $('#admCrew').value = prov.capacity.crew;
+      $('#admPayMethods').value = (prov.payment?.methods||[]).join(',');
+      $('#admHoldMin').value = prov.payment?.holdMinutes ?? 60;
+      $('#admVenmo').value = prov.handles?.venmo || '';
+      $('#admCash').value = prov.handles?.cashapp || '';
+      $('#admZelle').value = prov.handles?.zelle || '';
+      $('#admFloor').value = prov.policies?.floorTotal ?? 0;
+      $('#admMaxJobs').value = prov.policies?.maxJobsPerDay ?? 20;
+      $('#admBlackouts').value = (prov.policies?.blackoutDates||[]).join(',');
+
+      const jobs = state.jobs.filter(j=> j.providerId===prov.id);
+      const totalRev = jobs.reduce((s,j)=> s + (j.total||0), 0);
+      const depCollected = jobs.reduce((s,j)=> s + (j.paidAmount||0), 0);
+      const todayJobs = jobs.filter(j=> sameDay(j.when, new Date())).length;
+      const anl = $('#admAnalytics');
+      anl.innerHTML = `
+        <div class="row">
+          <div class="col-6"><div class="k"><div class="mini">Gross scheduled</div><div class="v">${money(totalRev)}</div></div></div>
+          <div class="col-6"><div class="k"><div class="mini">Deposits collected</div><div class="v">${money(depCollected)}</div></div></div>
+          <div class="col-6"><div class="k"><div class="mini">Jobs today</div><div class="v">${todayJobs}</div></div></div>
+          <div class="col-6"><div class="k"><div class="mini">Capacity today (crew-hrs left)</div><div class="v">${remainingCapacity(prov, state.jobs)}</div></div></div>
+        </div>
+      `;
+    }
+
+    function saveAndRender(){
+      DB.save(state);
+      renderAll();
+    }
+
+    function renderAll(){
+      renderProviderPill();
+      renderCitySeg();
+      renderViewSeg();
+      renderZoneTabs();
+      renderQuote();
+      renderCalendar();
+      renderJobs();
+      renderFeed();
+      renderAdmin();
+      $('#publicBadge').textContent = state.publicMode ? 'On' : 'Off';
+      const showQuote = state.view==='Quote';
+      const showOps = state.view!=='Admin';
+      const adminPanel = $('#adminPanel');
+      $('#appGrid').style.display = showQuote? '' : 'none';
+      $('.grid-ops').style.display = showOps? '' : 'none';
+      adminPanel.style.display = state.view==='Admin'? '' : 'none';
+    }
+
+    function createJob({status, paidAmount=0, manual=false}){
+      const prov = activeProvider();
+      const inp = readQuoteInputs();
+
+      const dateISO = (inp.when || new Date().toISOString()).slice(0,10);
+      if (isBlackout(dateISO, prov)){
+        toast('Cannot book: blackout date');
+        feed(prov.id, `Booking blocked by blackout date ${dateISO}`, 'warn');
+        return null;
+      }
+      if (maxJobsReached(dateISO, prov)){
+        toast('Cannot book: max jobs reached for date');
+        feed(prov.id, `Booking blocked: max jobs reached for ${dateISO}`, 'warn');
+        return null;
+      }
+
+      const q = computeQuote(inp, prov);
+      const whenIso = inp.when || new Date().toISOString();
+      const job = {
+        id: crypto.randomUUID(),
+        providerId: prov.id,
+        providerSlug: prov.slug,
+        service: inp.service,
+        when: whenIso,
+        pickup: inp.originAddress || 'Origin',
+        dropoff: inp.destAddress || 'Destination',
+        originStairs: Number(inp.originStairs||0),
+        destStairs: Number(inp.destStairs||0),
+        siteFee: Number(inp.siteFee||0),
+        crew: Number(inp.crew||2),
+        hours: Number(inp.hours||3),
+        boxes: Number(inp.boxes||0),
+        addons: q.addonsSel,
+        zoneId: q.zone.id, zoneName: q.zone.name,
+        distanceMi: q.distanceMi,
+        base: q.base, fees: q.fees, total: q.total,
+        deposit: q.deposit, depositPct: q.depositPct,
+        status,
+        paidAmount,
+        pay: { method: manual? 'Manual' : (paidAmount>0?'Card (test)': null) },
+        hold: holdInfo(prov),
+        timing: makeTiming(prov, q, whenIso),
+        risk: { level:'ok', lastAlertAt:null },
+        customer: {
+          name: inp.custName || '',
+          phone: inp.custPhone || '',
+          email: inp.custEmail || '',
+          notes: inp.custNotes || ''
+        }
+      };
+      state.jobs.push(job);
+      feed(prov.id, `${status}: ${job.pickup} → ${job.dropoff} • ${money(job.total)}`);
+      saveAndRender();
+      return job;
+    }
+
+    function holdInfo(prov){
+      const mins = prov.payment?.holdMinutes ?? 60;
+      const expiresAt = Date.now() + mins*60*1000;
+      return { expiresAt };
+    }
+    function makeTiming(prov, quote, whenIso){
+      const startMs = new Date(whenIso).getTime();
+      const zone = quote.zone.id;
+      const speeds = { core:1.5, ring:2.0, far:2.5 };
+      const estTravelMin = Math.max(5, Math.round((quote.distanceMi||0) * (speeds[zone] || 2.0)));
+      const buffer = prov.ops?.thresholds?.buffer ?? 20;
+      const departBy = startMs - (estTravelMin + buffer)*60*1000;
+      return { departBy, estTravelMin, etaMin:null };
+    }
+
+    function verifyDeposit(jobId){
+      const j = state.jobs.find(x=>x.id===jobId);
+      if (!j) return;
+      j.status = 'Booked';
+      j.paidAmount = j.deposit;
+      feed(j.providerId, `Deposit verified: ${money(j.deposit)} • ${j.pickup}`, 'info');
+      saveAndRender();
+    }
+    function cancelHold(jobId){
+      const idx = state.jobs.findIndex(x=>x.id===jobId);
+      if (idx<0) return;
+      const j = state.jobs[idx];
+      state.jobs.splice(idx,1);
+      feed(j.providerId, `Hold canceled/expired • ${j.pickup}`, 'warn');
+      saveAndRender();
+    }
+    function markCompleted(jobId){
+      const j = state.jobs.find(x=>x.id===jobId);
+      if (!j) return;
+      j.status = 'Completed';
+      feed(j.providerId, `Completed • Balance collected • ${j.pickup}`, 'info');
+      saveAndRender();
+    }
+
+    function seedScenario(){
+      const prov = activeProvider();
+      const today = new Date();
+      const at = (o,h)=> new Date(today.getFullYear(), today.getMonth(), today.getDate()+o, h, 0, 0).toISOString();
+      const samples = [
+        {o:'120 Oak St, Core', d:'55 Maple Ave', os:1, ds:0, crew:2, h:3, when: at(0, new Date().getHours()+2)},
+        {o:'777 County Rd, Far', d:'22 Lake View', os:2, ds:1, crew:3, h:4, when: at(1, 10)},
+        {o:'19 NW 18th St, Ring', d:'233 Pine Blvd', os:0, ds:2, crew:2, h:2, when: at(2, 11)}
+      ];
+      samples.forEach((s,i)=>{
+        const calc = computeQuote({
+          originAddress:s.o, destAddress:s.d,
+          originStairs:s.os, destStairs:s.ds,
+          siteFee:0, crew:s.crew, hours:s.h, boxes:10, service:'Pack & Load', when:s.when
+        }, prov);
+        const status = i===0 ? 'Hold:Unverified' : 'Booked';
+        const paid = status==='Booked' ? calc.deposit : 0;
+        state.jobs.push({
+          id: crypto.randomUUID(),
+          providerId: prov.id,
+          providerSlug: prov.slug,
+          service: 'Pack & Load',
+          when: s.when,
+          pickup: s.o, dropoff: s.d,
+          originStairs: s.os, destStairs: s.ds,
+          siteFee: 0, crew: s.crew, hours: s.h, boxes:10,
+          addons: i===0?['insurance']:[],
+          zoneId: calc.zone.id, zoneName: calc.zone.name,
+          distanceMi: calc.distanceMi,
+          base: calc.base, fees: calc.fees, total: calc.total,
+          deposit: calc.deposit, depositPct: calc.depositPct,
+          status, paidAmount: paid,
+          hold: holdInfo(prov),
+          timing: makeTiming(prov, calc, s.when),
+          risk: { level:'ok', lastAlertAt:null },
+          customer: { name:'Seed User', phone:'555-0100', email:'seed@example.local', notes:'' }
+        });
+      });
+      feed(prov.id, 'Seed scenario created • includes near-term job for alert demo');
+      saveAndRender();
+      toast('Seeded jobs & alerts demo');
+    }
+
+    function openProviderModal(){
+      const dlg = $('#providerModal');
+      const body = $('#provBody');
+      body.innerHTML = '';
+
+      const list = el('div','list');
+      state.providers.forEach(p=>{
+        const row = el('div','job');
+        row.append(
+          el('div','route', `${p.name} • ${p.city}`),
+          el('div','meta', `Slug ${p.slug} • Crew ${p.capacity.crew} • DailyHrs ${p.capacity.dailyHours}`)
+        );
+        const act = el('div','inline-actions');
+        const use = el('button','btn','Use');
+        use.onclick = ()=> { state.activeProviderId = p.id; dlg.close(); saveAndRender(); };
+        const dup = el('button','btn ghost','Duplicate');
+        dup.onclick = ()=> {
+          const cp = JSON.parse(JSON.stringify(p));
+          cp.id = crypto.randomUUID();
+          cp.slug = (p.slug + '-' + Math.floor(Math.random()*100)).toLowerCase();
+          cp.name = p.name + ' Copy';
+          state.providers.push(cp);
+          saveAndRender();
+        };
+        const del = el('button','btn warn','Delete');
+        del.onclick = ()=> {
+          if (state.providers.length<=1){ toast('Need at least one provider'); return; }
+          state.providers = state.providers.filter(x=>x.id!==p.id);
+          if (state.activeProviderId===p.id) state.activeProviderId = state.providers[0].id;
+          saveAndRender();
+          openProviderModal();
+        };
+        act.append(use, dup, del);
+        row.append(act);
+        list.append(row);
+      });
+
+      const hr = document.createElement('hr');
+      const form = el('div','row');
+      const name = el('input'); name.placeholder='Provider name';
+      const city = el('input'); city.placeholder='City, ST';
+      const slug = el('input'); slug.placeholder='slug-name';
+      name.className='col-4'; city.className='col-4'; slug.className='col-4';
+      form.append(name, city, slug);
+
+      const create = el('button','btn','Create Provider');
+      create.onclick = ()=>{
+        const nm = name.value || 'New Provider';
+        const ct = city.value || 'City, ST';
+        const sg = (slug.value || nm.toLowerCase().replace(/\s+/g,'-')).replace(/[^a-z0-9\-]/g,'');
+        const base = defaultProviders()[0];
+        const p = JSON.parse(JSON.stringify(base));
+        p.id = crypto.randomUUID();
+        p.name = nm;
+        p.city = ct;
+        p.slug = sg;
+        p.ops.lastKnownLocation = null;
+        p.ops.lastPingAt = null;
+        state.providers.push(p);
+        state.activeProviderId = p.id;
+        saveAndRender();
+        dlg.close();
+      };
+
+      body.append(el('div','mini','Active & saved providers'), list, hr, el('div','mini','Create new'), form, create);
+      dlg.showModal();
+    }
+
+    function exportState(){
+      const data = JSON.stringify(state, null, 2);
+      const blob = new Blob([data], {type:'application/json'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `moveops_v11_state_${Date.now()}.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+      toast('Exported state JSON');
+    }
+
+    function importState(file){
+      const reader = new FileReader();
+      reader.onload = e=>{
+        try{
+          const next = JSON.parse(e.target.result);
+          if (!next || !next.providers) throw new Error('Invalid');
+          state = next;
+          saveAndRender();
+          toast('Imported state');
+        }catch(err){
+          toast('Import failed');
+        }
+      };
+      reader.readAsText(file);
+    }
+
+    function exportQuote(){
+      const prov = activeProvider();
+      const inp = readQuoteInputs();
+      const q = computeQuote(inp, prov);
+      const quote = {
+        provider: { slug: prov.slug, name: prov.name, city: prov.city },
+        input: inp,
+        pricing: {
+          base: q.base, fees: q.fees, total: q.total, deposit: q.deposit,
+          breakdown: {
+            travel: q.travel, stairs: q.stairsFee, mileage: q.mileageAddon, site_boxes: q.boxSite, addons: q.addonsFee
+          },
+          depositPolicy: q.depPctText
+        },
+        computed: { zone: q.zone.name, distanceMi: q.distanceMi, etaConfidence: $('#etaConf').textContent },
+        generatedAt: new Date().toISOString()
+      };
+      const data = JSON.stringify(quote, null, 2);
+      const blob = new Blob([data], {type:'application/json'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `quote_${prov.slug}_${Date.now()}.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+      toast('Quote JSON downloaded');
+    }
+
+    function resetInputs(){
+      ['service','when','originAddress','originStairs','destAddress','destStairs','siteFee','crew','hours','boxes','custName','custPhone','custEmail','custNotes'].forEach(id=>{
+        const n = document.getElementById(id);
+        if (!n) return;
+        if (n.tagName==='SELECT') n.selectedIndex = 0;
+        else n.value = '';
+      });
+      const addons = $('#addons');
+      [...addons.options].forEach(o=> o.selected=false);
+      renderQuote();
+    }
+
+    function openPayModal(){
+      const dlg = $('#payModal');
+      const prov = activeProvider();
+      const methods = prov.payment?.methods || ['Card (test)'];
+      const sel = $('#payMethod');
+      sel.innerHTML = '';
+      methods.forEach(m=>{
+        const o = document.createElement('option');
+        o.value = m; o.textContent = m;
+        sel.append(o);
+      });
+      const q = computeQuote(readQuoteInputs(), prov);
+      $('#payAmount').value = q.deposit.toFixed(2);
+      $('#handleVal').textContent = '—';
+      $('#memoVal').textContent = `Deposit ${Math.round(q.deposit)} for ${prov.slug}`;
+      const exp = Date.now() + (prov.payment?.holdMinutes ?? 60)*60*1000;
+      $('#holdExpireVal').textContent = new Date(exp).toLocaleTimeString();
+      sel.onchange = ()=>{
+        const v = sel.value.toLowerCase();
+        const h = prov.handles || {};
+        let handle = '—';
+        if (v.includes('venmo')) handle = h.venmo || '—';
+        if (v.includes('cashapp') || v.includes('cash')) handle = h.cashapp || '—';
+        if (v.includes('zelle')) handle = h.zelle || '—';
+        $('#handleVal').textContent = handle;
+      };
+      dlg.showModal();
+    }
+
+    function simulatePayment(){
+      const prov = activeProvider();
+      const inp = readQuoteInputs();
+      const q = computeQuote(inp, prov);
+      const job = createJob({status:'Booked', paidAmount:q.deposit});
+      if (!job) return;
+      $('#payModal').close();
+      toast('Payment simulated. Job booked.');
+    }
+
+    function createHoldOnly(){
+      const job = createJob({status:'Hold:Unverified', manual:true});
+      if (!job) return;
+      $('#payModal').close();
+      toast('Hold created. Awaiting verification.');
+    }
+
+    function iSentPayment(){
+      const prov = activeProvider();
+      const job = createJob({status:'Hold:Unverified', manual:true});
+      if (!job) return;
+      $('#payModal').close();
+      toast('Marked as customer-paid (manual). Verify in queue.');
+    }
+
+    function togglePublic(){
+      state.publicMode = !state.publicMode;
+      saveAndRender();
+      toast(`Public mode ${state.publicMode?'enabled':'disabled'}`);
+    }
+
+    function addBlackout(){
+      const prov = activeProvider();
+      const today = todayISO();
+      const list = new Set(prov.policies.blackoutDates || []);
+      if (list.has(today)) { list.delete(today); toast('Removed today from blackout'); }
+      else { list.add(today); toast('Added today as blackout'); }
+      prov.policies.blackoutDates = [...list];
+      saveAndRender();
+    }
+
+    function savePricing(){
+      const p = activeProvider();
+      p.pricing.basePerHourPerMover = Number($('#admBase').value||0);
+      p.pricing.stairsPerFlight = Number($('#admStairs').value||0);
+      p.pricing.boxFeeEach = Number($('#admBox').value||0);
+      p.pricing.mileageRate = Number($('#admMileage').value||0);
+      const depPct = Number($('#admDepPct').value||0.2);
+      const depMin = Number($('#admDepMin').value||0);
+      const depCap = Number($('#admDepCap').value||999);
+      p.payment = p.payment || {};
+      p.payment.depositPct = depPct;
+      p.payment.minDeposit = depMin;
+      p.payment.depositCap = depCap;
+      p.capacity.dailyHours = Number($('#admDailyHrs').value||0);
+      p.capacity.crew = Number($('#admCrew').value||0);
+      saveAndRender();
+      toast('Pricing saved');
+    }
+
+    function savePayments(){
+      const p = activeProvider();
+      const methods = ($('#admPayMethods').value||'').split(',').map(s=>s.trim()).filter(Boolean);
+      p.payment = p.payment || {};
+      p.payment.methods = methods.length? methods : ['Card (test)'];
+      p.payment.holdMinutes = Number($('#admHoldMin').value||60);
+      p.handles = p.handles || {};
+      p.handles.venmo = $('#admVenmo').value || '';
+      p.handles.cashapp = $('#admCash').value || '';
+      p.handles.zelle = $('#admZelle').value || '';
+      saveAndRender();
+      toast('Payment methods saved');
+    }
+
+    function saveGuardrails(){
+      const p = activeProvider();
+      p.policies = p.policies || {};
+      p.policies.floorTotal = Number($('#admFloor').value||0);
+      p.policies.maxJobsPerDay = Number($('#admMaxJobs').value||20);
+      p.policies.blackoutDates = ($('#admBlackouts').value||'').split(',').map(s=>s.trim()).filter(Boolean);
+      saveAndRender();
+      toast('Guardrails saved');
+    }
+
+    function simulatePing(){
+      const p = activeProvider();
+      const t = Date.now();
+      p.ops.lastPingAt = t;
+      p.ops.lastKnownLocation = { x: Math.random()*100, y: Math.random()*100 };
+      feed(p.id, `GPS ping @ ${p.ops.lastKnownLocation.x.toFixed(1)},${p.ops.lastKnownLocation.y.toFixed(1)}`);
+      saveAndRender();
+    }
+
+    function toggleEvaluator(){
+      state.evaluatorOn = !state.evaluatorOn;
+      saveAndRender();
+      toast(`Evaluator ${state.evaluatorOn?'On':'Off'}`);
+    }
+
+    function exportAsZipLike(){
+      const files = {
+        'index.html': document.documentElement.outerHTML
+      };
+      const content = Object.entries(files).map(([name,data])=>`--- ${name} ---\n${data}`).join('\n');
+      const blob = new Blob([content], {type:'text/plain'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'moveops_v11_bundle.txt';
+      a.click();
+      URL.revokeObjectURL(url);
+      toast('Packaged site as single file (txt)');
+    }
+
+    // Event bindings
+    function bind(){
+      $('#recalcBtn').onclick = renderQuote;
+      $('#shareBtn').onclick = exportQuote;
+      $('#holdBtn').onclick = createHoldOnly;
+      $('#bookBtn').onclick = openPayModal;
+      $('#resetBtn').onclick = resetInputs;
+
+      $('#publicToggle').onclick = togglePublic;
+      $('#seedBtn').onclick = seedScenario;
+      $('#exportBtn').onclick = exportState;
+      $('#importBtn').onclick = ()=> $('#importFile').click();
+      $('#importFile').onchange = e=> { if (e.target.files[0]) importState(e.target.files[0]); };
+      $('#resetStateBtn').onclick = ()=> { if (confirm('Clear local state?')) { DB.clear(); state = initialState(); state.activeProviderId = state.providers[0].id; saveAndRender(); } };
+      $('#pingBtn').onclick = simulatePing;
+
+      $('#closePay').onclick = ()=> $('#payModal').close();
+      $('#paySim').onclick = simulatePayment;
+      $('#holdOnly').onclick = createHoldOnly;
+      $('#iPaid').onclick = iSentPayment;
+
+      $('#closeProv').onclick = ()=> $('#providerModal').close();
+
+      $('#addBlackoutBtn').onclick = addBlackout;
+      $('#savePricingBtn').onclick = savePricing;
+      $('#savePaymentBtn').onclick = savePayments;
+      $('#saveGuardsBtn').onclick = saveGuardrails;
+
+      $('#toggleEvalBtn').onclick = toggleEvaluator;
+
+      ['service','when','originAddress','originStairs','destAddress','destStairs','siteFee','crew','hours','boxes','custName','custPhone','custEmail','custNotes','addons'].forEach(id=>{
+        const n = document.getElementById(id);
+        if (!n) return;
+        n.addEventListener('input', renderQuote);
+        n.addEventListener('change', renderQuote);
+      });
+
+      // Hidden shortcut to "email" bundle simulation by downloading a single attachment-like file
+      document.addEventListener('keydown', (e)=>{
+        if (e.altKey && e.key.toLowerCase()==='e'){
+          exportAsZipLike();
+        }
+      });
+    }
+
+    // Initialize defaults
+    function initDefaults(){
+      if (!$('#when').value){
+        const dt = new Date();
+        dt.setHours(dt.getHours()+24, 0, 0, 0);
+        const iso = dt.toISOString().slice(0,16);
+        $('#when').value = iso;
+      }
+      $('#originAddress').value ||= '123 Main St, Gainesville';
+      $('#destAddress').value ||= '456 Oak Ave, Gainesville';
+    }
+
+    // Kickoff
+    bind();
+    initDefaults();
+    renderAll();
+
+  </script>
+</body>
+</html>
