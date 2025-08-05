@@ -1,0 +1,1195 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2113.65">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    span.s1 {font: 12.0px 'Lucida Grande'}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="en"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;meta charset="UTF-8" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;title&gt;HT-AIOS • MoveOps v11 MVP — Multi-Provider SaaS&lt;/title&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;meta name="version" content="v11-mvp-launchable" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>:root{</p>
+<p class="p1"><span class="Apple-converted-space">      </span>--bg:#0b1120;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>--panel:#0f172a;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>--card:#111827;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>--text:#e5e7eb;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>--muted:#9aa6bd;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>--accent:#2E6CF6;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>--accent-2:#22c55e;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>--warn:#ef4444;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>--border:#1f2937;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>--chip:#0b1733;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>--shadow: 0 6px 24px rgba(0,0,0,0.3);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>--radius:12px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>--ok:#22c55e;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>--late:#ef4444;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>--warn2:#f59e0b;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>*{box-sizing:border-box}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>html,body{margin:0; padding:0; background:linear-gradient(180deg,#0b1120 0%, #0a132b 100%); color:var(--text); font-family:Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji"; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>header{position:sticky; top:0; background:rgba(10,19,43,0.9); backdrop-filter:saturate(120%) blur(8px); border-bottom:1px solid var(--border); z-index:10}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.nav{display:flex; align-items:center; gap:10px; padding:10px 14px; max-width:1200px; margin:0 auto}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.brand{font-weight:800; letter-spacing:0.2px}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.brand b{color:var(--accent)}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.version{color:var(--muted); font-size:12px; margin-right:8px}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.spacer{flex:1}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.pill{display:inline-flex; align-items:center; gap:8px; padding:6px 10px; background:var(--card); border:1px solid var(--border); border-radius:999px; font-size:12px; cursor:pointer; user-select:none}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.pill:hover{border-color:#274379}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.badge{display:inline-flex; align-items:center; padding:2px 8px; border-radius:999px; font-weight:600; background:#0c1b38; color:#cfe1ff; border:1px solid #1d3a77}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.seg{display:inline-flex; gap:6px; background:var(--card); border:1px solid var(--border); border-radius:999px; padding:4px}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.seg button{border:none; background:transparent; color:var(--muted); padding:6px 10px; border-radius:999px; cursor:pointer; font-weight:600}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.seg button.active{background:#102046; color:#e9f0ff}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>main{max-width:1200px; margin:16px auto; padding:0 12px}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.grid{display:grid; grid-template-columns: 2fr 1fr; gap:16px}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.grid-ops{display:grid; grid-template-columns: 1fr; gap:16px}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>@media (min-width: 1020px){ .grid-ops{grid-template-columns: 1fr 1fr} }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.card{background:linear-gradient(180deg,#0c1427 0,#0b1324 100%); border:1px solid var(--border); border-radius:var(--radius); box-shadow:var(--shadow)}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.card .hd{display:flex; align-items:center; justify-content:space-between; padding:12px 14px; border-bottom:1px solid var(--border)}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.card .bd{padding:12px 14px}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>h3{margin:0; font-size:16px}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.row{display:flex; flex-wrap:wrap; gap:10px}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.col-12{flex:1 1 100%}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.col-6{flex:1 1 calc(50% - 10px)}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.col-4{flex:1 1 calc(33.33% - 10px)}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.col-3{flex:1 1 calc(25% - 10px)}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>label{display:block; font-size:12px; color:var(--muted); margin-bottom:6px}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>input,select,textarea{width:100%; background:#0a172f; border:1px solid var(--border); border-radius:10px; padding:10px 10px; outline:none; color:var(--text)}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>input:focus, select:focus, textarea:focus{border-color:#2b4f99}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.tabs{display:flex; gap:6px; align-items:center}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.tabs .tab{padding:6px 10px; border:1px solid var(--border); background:#0a172f; border-radius:999px; color:#cfe1ff; font-size:12px}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.kpi{display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:8px}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.k{background:#0a172f; border:1px solid var(--border); border-radius:10px; padding:8px 10px; display:grid; gap:6px}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.split{display:flex; align-items:center; justify-content:space-between; gap:10px}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.mini{font-size:12px; color:var(--muted)}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.v{font-weight:800}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.actions{display:flex; gap:8px; flex-wrap:wrap}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.btn{background:linear-gradient(180deg,#2b5fe9,#1d45b6); border:none; color:#fff; padding:10px 12px; border-radius:10px; cursor:pointer; font-weight:700}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.btn:hover{filter:brightness(1.05)}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.btn.ghost{background:transparent; border:1px solid var(--border); color:#cfe1ff}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.btn.warn{background:linear-gradient(180deg,#ef4444,#b91c1c)}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.btn.ok{background:linear-gradient(180deg,#22c55e,#198c44)}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.list{display:grid; gap:8px}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.calendar{display:grid; grid-template-columns: repeat(7, 1fr); gap:8px}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.day{background:#0a172f; border:1px solid var(--border); border-radius:10px; min-height:110px; padding:8px; display:flex; flex-direction:column; gap:6px; position:relative}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.day .d{font-size:12px; color:#9bb0d1}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.job{background:#0b1733; border:1px solid #1a3670; border-radius:10px; padding:8px; font-size:12px; display:flex; flex-direction:column; gap:4px}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.job .route{color:#e6f0ff}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.job .meta{display:flex; gap:8px; color:#9bb0d1}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.risk-dot{width:8px; height:8px; border-radius:50%; display:inline-block; margin-left:6px}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.risk-ok{background:var(--ok)}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.risk-warn{background:var(--warn2)}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.risk-late{background:var(--late)}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.feed{display:grid; gap:6px; max-height:260px; overflow:auto}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.feed .evt{background:#0a172f; border:1px solid var(--border); border-radius:10px; padding:8px; font-size:12px}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.sop{display:grid; grid-template-columns: 1fr 1fr; gap:8px}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.cardlet{background:#0a172f; border:1px solid var(--border); border-radius:10px; padding:8px}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.calendar .cap{margin-top:auto; font-size:11px; color:#89a3d3}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.switch{display:flex; align-items:center; gap:8px}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.note{font-size:12px; color:#2E6CF6}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.toast { position: fixed; bottom: 16px; right: 16px; background: #fff; border: 1px solid var(--border); color: #111; padding: 10px 12px; border-radius: 10px; box-shadow: var(--shadow); font-size: 13px; display: none; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.breakdown{display:grid; gap:6px; margin-top:8px}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.bdrow{display:flex; justify-content:space-between; font-size:12px; color:var(--muted)}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.bdrow strong{color:var(--text)}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.inline-actions{display:flex; gap:6px; flex-wrap:wrap}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.countdown{font-variant-numeric: tabular-nums}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>hr{border:none; border-top:1px solid var(--border); margin:12px 0}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.provider-pill { display:flex; align-items:center; gap:8px }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.provider-pill .name{font-weight:600}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.provider-pill .status{border-color:#C9D6EA}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.provider-select { min-width: 260px; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.hint{font-size:11px; color:#6b7ea3}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>dialog{border:none; border-radius:12px; padding:0; width:min(820px, 92vw); background:#0b1427; color:#eaf1ff; border:1px solid #1b2d55}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.modal-hd{display:flex; align-items:center; justify-content:space-between; padding:12px 14px; border-bottom:1px solid var(--border)}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.modal-bd{padding:12px 14px}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.kv{display:flex; gap:8px; align-items:center}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.kv .label{color:#9bb0d1; font-size:12px}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>footer{max-width:1200px; margin:20px auto; padding:12px; color:#89a3d3; font-size:12px; text-align:center}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.admin-grid{display:grid; grid-template-columns: 1fr 1fr; gap:12px}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.stat{background:#0a172f; border:1px solid var(--border); border-radius:10px; padding:10px; display:grid; gap:6px}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.danger{color:#ffcccc}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;script type="importmap"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{</p>
+<p class="p1"><span class="Apple-converted-space">      </span>"imports": {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>"lit": "https://cdn.jsdelivr.net/npm/lit@3/+esm"</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/script&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;header&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="nav"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="brand"&gt;HT-AIOS • &lt;b&gt;MoveOps v11&lt;/b&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;span class="version"&gt;MVP • Multi-Provider&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="pill provider-select" id="providerPill" title="Switch provider or create new"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="seg" id="citySeg"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="spacer"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="seg" id="viewSeg"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="pill" id="publicToggle"&gt;&lt;span&gt;Public mode&lt;/span&gt;&lt;span class="badge" id="publicBadge"&gt;Off&lt;/span&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="pill" id="seedBtn"&gt;Seed scenario&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="pill" id="exportBtn" title="Download state JSON"&gt;Export&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="pill" id="importBtn" title="Import state JSON"&gt;Import&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;input type="file" id="importFile" accept="application/json" style="display:none"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="pill" id="resetStateBtn" title="Clear local data"&gt;Reset State&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="pill" id="pingBtn" title="Simulate provider GPS ping"&gt;Ping location&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/header&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;main&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="grid" id="appGrid"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;section class="card" id="quoteCard"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="hd"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;h3&gt;Customer Quote &amp; Booking&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="tabs" id="zoneTabs"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="bd"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="row" style="align-items:end; margin-bottom:8px"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="col-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;label&gt;Service&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;select id="service"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;option&gt;Load Only&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;option selected&gt;Pack &amp; Load&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;option&gt;U-Box&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;option&gt;Specialty&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;/select&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="col-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;label&gt;Date &amp; Time&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;input type="datetime-local" id="when"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="col-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;label&gt;Origin address&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;input id="originAddress" placeholder="123 Main St, Gainesville"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;div class="hint"&gt;Zone computed from origin&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="col-3"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;label&gt;Origin stairs (flights)&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;select id="originStairs"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;option&gt;0&lt;/option&gt;&lt;option&gt;1&lt;/option&gt;&lt;option&gt;2&lt;/option&gt;&lt;option&gt;3&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;/select&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="col-3"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;label&gt;Destination address&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;input id="destAddress" placeholder="456 Oak Ave, Gainesville"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="col-3"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;label&gt;Destination stairs (flights)&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;select id="destStairs"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;option&gt;0&lt;/option&gt;&lt;option&gt;1&lt;/option&gt;&lt;option&gt;2&lt;/option&gt;&lt;option&gt;3&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;/select&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="col-3"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;label&gt;Site surcharge&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;select id="siteFee"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;option value="0"&gt;None&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;option value="25"&gt;Handling&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;option value="40"&gt;Elevator&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;option value="60"&gt;Long push&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;/select&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="col-3"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;label&gt;Crew size&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;select id="crew"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;option&gt;2&lt;/option&gt;&lt;option&gt;3&lt;/option&gt;&lt;option&gt;4&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;/select&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="col-3"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;label&gt;Estimated hours&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;select id="hours"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;option&gt;2&lt;/option&gt;&lt;option selected&gt;3&lt;/option&gt;&lt;option&gt;4&lt;/option&gt;&lt;option&gt;5&lt;/option&gt;&lt;option&gt;6&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;/select&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="col-3"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;label&gt;Boxes&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;select id="boxes"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;option&gt;0&lt;/option&gt;&lt;option&gt;10&lt;/option&gt;&lt;option selected&gt;20&lt;/option&gt;&lt;option&gt;30&lt;/option&gt;&lt;option&gt;40&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;/select&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="col-3"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;label&gt;Add-ons&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;select id="addons" multiple size="3" title="Hold Ctrl/Cmd to multi-select"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;option value="packing"&gt;Packing assistance&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;option value="cleaning"&gt;Move-out cleaning&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;option value="insurance"&gt;Damage coverage&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;/select&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;div class="hint"&gt;Optional: increase accuracy and upsell&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="col-12"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;label&gt;Contact info (for confirmation)&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;div class="row"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="col-4"&gt;&lt;input id="custName" placeholder="Full name"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="col-4"&gt;&lt;input id="custPhone" placeholder="Phone"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="col-4"&gt;&lt;input id="custEmail" placeholder="Email"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="col-12"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;label&gt;Notes&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;textarea id="custNotes" rows="2" placeholder="Gate codes, parking, special items..."&gt;&lt;/textarea&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="kpi"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="k"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;div class="split"&gt;&lt;span class="mini"&gt;Zone (origin)&lt;/span&gt;&lt;span id="zoneName" class="badge"&gt;Core&lt;/span&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;div class="split"&gt;&lt;span class="mini"&gt;ETA confidence&lt;/span&gt;&lt;span id="etaConf" class="badge"&gt;High&lt;/span&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;div class="split"&gt;&lt;span class="mini"&gt;Pseudo-distance&lt;/span&gt;&lt;span id="distMi"&gt;0.0 mi&lt;/span&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="k"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;div class="split"&gt;&lt;span class="mini"&gt;Base&lt;/span&gt;&lt;span id="kBase" class="v"&gt;$0&lt;/span&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;div class="split"&gt;&lt;span class="mini"&gt;Fees&lt;/span&gt;&lt;span id="kFees"&gt;$0&lt;/span&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;div class="split"&gt;&lt;span class="mini"&gt;Deposit&lt;/span&gt;&lt;span id="kDeposit" class="badge"&gt;$0&lt;/span&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="breakdown" id="breakdown"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="bdrow"&gt;&lt;span&gt;Base&lt;/span&gt;&lt;strong id="bdBase"&gt;$0&lt;/strong&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="bdrow"&gt;&lt;span&gt;Travel (origin zone)&lt;/span&gt;&lt;strong id="bdZoneFees"&gt;$0&lt;/strong&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="bdrow"&gt;&lt;span&gt;Stairs (O + D)&lt;/span&gt;&lt;strong id="bdStairs"&gt;$0&lt;/strong&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="bdrow"&gt;&lt;span&gt;Mileage add-on&lt;/span&gt;&lt;strong id="bdMileage"&gt;$0&lt;/strong&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="bdrow"&gt;&lt;span&gt;Site/Boxes&lt;/span&gt;&lt;strong id="bdSiteBoxes"&gt;$0&lt;/strong&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="bdrow"&gt;&lt;span&gt;Add-ons&lt;/span&gt;&lt;strong id="bdAddons"&gt;$0&lt;/strong&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="bdrow"&gt;&lt;span&gt;Deposit rules&lt;/span&gt;&lt;strong id="bdDepPct"&gt;—&lt;/strong&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="split" style="margin-top:12px"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="actions"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;button class="btn" id="recalcBtn"&gt;Recalculate&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;button class="btn" id="shareBtn"&gt;Share Quote&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;button class="btn" id="holdBtn"&gt;Create Hold&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;button class="btn ok" id="bookBtn"&gt;Book &amp; Pay&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;button class="btn ghost" id="resetBtn"&gt;Reset&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="inline-actions"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;span class="mini"&gt;Total:&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;span id="kTotal" class="badge" style="margin-left:6px"&gt;$0&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;span class="mini"&gt;Remaining capacity&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;span id="capBadge" class="badge"&gt;—&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="hint" id="noHidden"&gt;No hidden fees — what you see is what you pay. Deposit due now, balance at job end.&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/section&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;aside class="card" id="customerCard"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="hd"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;h3&gt;Customer Preview&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;span class="badge" id="custStatus"&gt;Draft&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="bd"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="list" style="margin-bottom:10px"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="split"&gt;&lt;span class="mini"&gt;Estimated Total&lt;/span&gt;&lt;span id="custTotal" class="v"&gt;$0&lt;/span&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="split"&gt;&lt;span class="mini"&gt;Deposit Due&lt;/span&gt;&lt;span id="custDeposit" class="badge"&gt;$0&lt;/span&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="split"&gt;&lt;span class="mini"&gt;Window&lt;/span&gt;&lt;span id="custETA"&gt;10:00–12:00&lt;/span&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="split"&gt;&lt;span class="mini"&gt;Confidence&lt;/span&gt;&lt;span id="custConf" class="badge"&gt;High&lt;/span&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="sop"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="cardlet"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;div class="mini"&gt;Status&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;div id="custStage" style="font-weight:700"&gt;Hold&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="cardlet"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;div class="mini"&gt;Balance&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;div id="custBalance" style="font-weight:700"&gt;$0&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;hr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="mini"&gt;Trip&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="list"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="mini" id="custTrip"&gt;—&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="mini" id="custStairs"&gt;Stairs: —&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="mini" id="custAddons"&gt;Add-ons: —&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="mini" id="custDepositNote"&gt;Deposit policy: —&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="mini" id="custContact"&gt;Contact: —&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/aside&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="grid-ops" style="margin-top:16px"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;section class="card"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="hd"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;h3&gt;Operations Console&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="split" style="gap:10px"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;span class="mini"&gt;Week view&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;span class="mini"&gt;Provider:&lt;/span&gt;&lt;span class="badge" id="activeSlug"&gt;—&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;span class="mini"&gt;Last ping:&lt;/span&gt;&lt;span class="badge" id="lastPingBadge"&gt;—&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;span class="mini"&gt;Evaluator:&lt;/span&gt;&lt;span class="badge" id="evalBadge"&gt;On&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;button class="btn ghost" id="toggleEvalBtn"&gt;Toggle&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="bd"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="calendar" id="calendar"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/section&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;section class="card"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="hd"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;h3&gt;Jobs &amp; Feeds&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="switch"&gt;&lt;input type="checkbox" id="queueToggle"&gt;&lt;span class="mini"&gt;Show queues&lt;/span&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="bd"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="list" id="jobsList"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;hr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="list" id="verifyList" style="display:none"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="list" id="balancesList" style="display:none; margin-top:8px"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;hr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="feed" id="ownerFeed"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/section&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;section class="card" style="margin-top:16px" id="adminPanel"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="hd"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;h3&gt;Admin • Provider Settings &amp; Policies&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="split" style="gap:8px"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;span class="mini"&gt;Guardrails: floors, caps, blackout&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;button class="btn ghost" id="addBlackoutBtn"&gt;Add Blackout&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="bd"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="admin-grid"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="stat"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="mini"&gt;Pricing (per active provider)&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="row"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;div class="col-4"&gt;&lt;label&gt;Base/hr/mover&lt;/label&gt;&lt;input id="admBase" type="number"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;div class="col-4"&gt;&lt;label&gt;Stairs/flight&lt;/label&gt;&lt;input id="admStairs" type="number"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;div class="col-4"&gt;&lt;label&gt;Box fee each&lt;/label&gt;&lt;input id="admBox" type="number"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;div class="col-4"&gt;&lt;label&gt;Mileage rate&lt;/label&gt;&lt;input id="admMileage" type="number" step="0.1"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="row"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;div class="col-4"&gt;&lt;label&gt;Deposit %&lt;/label&gt;&lt;input id="admDepPct" type="number" step="0.01"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;div class="col-4"&gt;&lt;label&gt;Deposit min&lt;/label&gt;&lt;input id="admDepMin" type="number"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;div class="col-4"&gt;&lt;label&gt;Deposit cap&lt;/label&gt;&lt;input id="admDepCap" type="number"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="row"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;div class="col-4"&gt;&lt;label&gt;Daily hours capacity&lt;/label&gt;&lt;input id="admDailyHrs" type="number"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;div class="col-4"&gt;&lt;label&gt;Crew slots&lt;/label&gt;&lt;input id="admCrew" type="number"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="split"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;div class="mini"&gt;Payment methods update affects Book &amp; Pay modal.&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;button class="btn" id="savePricingBtn"&gt;Save Settings&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="stat"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="mini"&gt;Payment Methods&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="row"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;div class="col-6"&gt;&lt;label&gt;Methods (comma separated)&lt;/label&gt;&lt;input id="admPayMethods" placeholder="Card (test),Cash,Venmo,Zelle"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;div class="col-6"&gt;&lt;label&gt;Hold minutes&lt;/label&gt;&lt;input id="admHoldMin" type="number"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="row"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;div class="col-4"&gt;&lt;label&gt;Venmo&lt;/label&gt;&lt;input id="admVenmo" placeholder="@handle"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;div class="col-4"&gt;&lt;label&gt;CashApp&lt;/label&gt;&lt;input id="admCash" placeholder="$handle"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;div class="col-4"&gt;&lt;label&gt;Zelle&lt;/label&gt;&lt;input id="admZelle" placeholder="email@bank"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="split"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;div class="mini"&gt;Manual verification on by default.&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;button class="btn" id="savePaymentBtn"&gt;Save Payments&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="stat"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="mini"&gt;Guardrails&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="row"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;div class="col-6"&gt;&lt;label&gt;Pricing floor (min total)&lt;/label&gt;&lt;input id="admFloor" type="number" value="0"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;div class="col-6"&gt;&lt;label&gt;Max jobs per day&lt;/label&gt;&lt;input id="admMaxJobs" type="number" value="20"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="row"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;div class="col-12"&gt;&lt;label&gt;Blackout dates (CSV YYYY-MM-DD)&lt;/label&gt;&lt;input id="admBlackouts" placeholder="2025-07-04,2025-12-25"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="split"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;div class="mini"&gt;Blocks booking on blackout days and floors cheap quotes.&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;button class="btn" id="saveGuardsBtn"&gt;Save Guardrails&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="stat"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="mini"&gt;Analytics (active provider)&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div id="admAnalytics"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/section&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/main&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;dialog id="payModal"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="modal-hd"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;strong&gt;Book &amp; Pay&lt;/strong&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;button class="btn ghost" id="closePay"&gt;Close&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="modal-bd"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="row"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="col-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;label&gt;Payment method&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;select id="payMethod"&gt;&lt;/select&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="col-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;label&gt;Deposit amount&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;input id="payAmount" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="col-12"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="note" id="payNote"&gt;Use test card 4242 4242 4242 4242 (simulated). No network calls.&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="mini" id="handleLine"&gt;Official handles shown for manual payments.&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="kv"&gt;&lt;span class="label"&gt;Handle:&lt;/span&gt;&lt;span id="handleVal"&gt;—&lt;/span&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="kv"&gt;&lt;span class="label"&gt;Memo:&lt;/span&gt;&lt;span id="memoVal"&gt;—&lt;/span&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="kv"&gt;&lt;span class="label"&gt;Hold expires:&lt;/span&gt;&lt;span id="holdExpireVal" class="countdown"&gt;—&lt;/span&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="split"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="inline-actions"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;button class="btn" id="paySim"&gt;Simulate Payment&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;button class="btn warn" id="holdOnly"&gt;Create Hold (no payment)&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;button class="btn ghost" id="iPaid"&gt;I sent payment&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div&gt;&lt;span class="mini"&gt;Due now&lt;/span&gt; &lt;span class="badge" id="dueNow"&gt;$0&lt;/span&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/dialog&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;dialog id="providerModal"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="modal-hd"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;strong&gt;Switch or Create Provider&lt;/strong&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;button class="btn ghost" id="closeProv"&gt;Close&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="modal-bd" id="provBody"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/dialog&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="toast" id="toast"&gt;&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;footer&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>HT-AIOS / Thoroughbred-OS • v11 MVP Launchable • Multi-Provider Engine • Local-first demo (no external assets)</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/footer&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;script type="module"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>// HT-AIOS MoveOps v11 MVP - Launchable, customer-ready demo</p>
+<p class="p1"><span class="Apple-converted-space">    </span>// Key upgrades added:</p>
+<p class="p1"><span class="Apple-converted-space">    </span>// - Admin panel to edit pricing/capacity/deposit/guardrails/payment methods/handles/blackouts</p>
+<p class="p1"><span class="Apple-converted-space">    </span>// - Contact capture (name/phone/email/notes) and stored on jobs</p>
+<p class="p1"><span class="Apple-converted-space">    </span>// - Export/Import JSON, Reset State</p>
+<p class="p1"><span class="Apple-converted-space">    </span>// - Share Quote (download quote JSON)</p>
+<p class="p1"><span class="Apple-converted-space">    </span>// - Namespaced storage key moveops_v11</p>
+<p class="p1"><span class="Apple-converted-space">    </span>// - Guardrails: pricing floor, blackout date block, max jobs/day</p>
+<p class="p1"><span class="Apple-converted-space">    </span>// - Evaluator toggle and badge</p>
+<p class="p1"><span class="Apple-converted-space">    </span>// - Light analytics: revenue totals, deposits, jobs/day</p>
+<p class="p1"><span class="Apple-converted-space">    </span>// - All procedural assets; zero network calls; importmap present (lit reserved for future)</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>// Local storage DB (v11 namespace)</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const DBKEY = 'moveops_v11';</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const DB = {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>load() {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const raw = localStorage.getItem(DBKEY);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>if (!raw) return null;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>try { return JSON.parse(raw); } catch { return null; }</p>
+<p class="p1"><span class="Apple-converted-space">      </span>},</p>
+<p class="p1"><span class="Apple-converted-space">      </span>save(state) {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>localStorage.setItem(DBKEY, JSON.stringify(state));</p>
+<p class="p1"><span class="Apple-converted-space">      </span>},</p>
+<p class="p1"><span class="Apple-converted-space">      </span>clear() {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>localStorage.removeItem(DBKEY);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>};</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>// Default providers with policies/guardrails</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const defaultProviders = () =&gt; ([</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{</p>
+<p class="p1"><span class="Apple-converted-space">        </span>id: crypto.randomUUID(),</p>
+<p class="p1"><span class="Apple-converted-space">        </span>slug: 'gvl-movers',</p>
+<p class="p1"><span class="Apple-converted-space">        </span>name: 'Gainesville Movers Co.',</p>
+<p class="p1"><span class="Apple-converted-space">        </span>city: 'Gainesville, FL',</p>
+<p class="p1"><span class="Apple-converted-space">        </span>zones: [</p>
+<p class="p1"><span class="Apple-converted-space">          </span>{ id:'core', name:'Core', travelFee: 25 },</p>
+<p class="p1"><span class="Apple-converted-space">          </span>{ id:'ring', name:'Ring', travelFee: 45 },</p>
+<p class="p1"><span class="Apple-converted-space">          </span>{ id:'far', name:'Far', travelFee: 75 }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>],</p>
+<p class="p1"><span class="Apple-converted-space">        </span>pricing: {</p>
+<p class="p1"><span class="Apple-converted-space">          </span>basePerHourPerMover: 45,</p>
+<p class="p1"><span class="Apple-converted-space">          </span>boxFeeEach: 1.2,</p>
+<p class="p1"><span class="Apple-converted-space">          </span>stairsPerFlight: 10,</p>
+<p class="p1"><span class="Apple-converted-space">          </span>mileageRate: 1.0,</p>
+<p class="p1"><span class="Apple-converted-space">          </span>depositPct: 0.2,</p>
+<p class="p1"><span class="Apple-converted-space">          </span>depositMin: 50,</p>
+<p class="p1"><span class="Apple-converted-space">          </span>depositCap: 300</p>
+<p class="p1"><span class="Apple-converted-space">        </span>},</p>
+<p class="p1"><span class="Apple-converted-space">        </span>addOns: { packing: 40, cleaning: 85, insurance: 35 },</p>
+<p class="p1"><span class="Apple-converted-space">        </span>capacity: { crew: 8, dailyHours: 24 },</p>
+<p class="p1"><span class="Apple-converted-space">        </span>payment: {</p>
+<p class="p1"><span class="Apple-converted-space">          </span>methods: ['Card (test)','Cash','Venmo','Zelle'],</p>
+<p class="p1"><span class="Apple-converted-space">          </span>requireDeposit: true,</p>
+<p class="p1"><span class="Apple-converted-space">          </span>depositPct: 0.2,</p>
+<p class="p1"><span class="Apple-converted-space">          </span>minDeposit: 50,</p>
+<p class="p1"><span class="Apple-converted-space">          </span>depositCap: 300,</p>
+<p class="p1"><span class="Apple-converted-space">          </span>verifyManual: true,</p>
+<p class="p1"><span class="Apple-converted-space">          </span>holdMinutes: 60</p>
+<p class="p1"><span class="Apple-converted-space">        </span>},</p>
+<p class="p1"><span class="Apple-converted-space">        </span>handles: {</p>
+<p class="p1"><span class="Apple-converted-space">          </span>venmo: '@HughesTransportation',</p>
+<p class="p1"><span class="Apple-converted-space">          </span>cashapp: '$HughesTransportation',</p>
+<p class="p1"><span class="Apple-converted-space">          </span>zelle: 'pay@hughes.local',</p>
+<p class="p1"><span class="Apple-converted-space">          </span>notes: 'Pay only official handles.'</p>
+<p class="p1"><span class="Apple-converted-space">        </span>},</p>
+<p class="p1"><span class="Apple-converted-space">        </span>ops: {</p>
+<p class="p1"><span class="Apple-converted-space">          </span>lastKnownLocation: null,</p>
+<p class="p1"><span class="Apple-converted-space">          </span>lastPingAt: null,</p>
+<p class="p1"><span class="Apple-converted-space">          </span>thresholds: {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>departLead: { core: 30, ring: 45, far: 75 },</p>
+<p class="p1"><span class="Apple-converted-space">            </span>buffer: 20,</p>
+<p class="p1"><span class="Apple-converted-space">            </span>grace: 15,</p>
+<p class="p1"><span class="Apple-converted-space">            </span>cooldown: 30</p>
+<p class="p1"><span class="Apple-converted-space">          </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>},</p>
+<p class="p1"><span class="Apple-converted-space">        </span>policies: {</p>
+<p class="p1"><span class="Apple-converted-space">          </span>floorTotal: 0,</p>
+<p class="p1"><span class="Apple-converted-space">          </span>maxJobsPerDay: 20,</p>
+<p class="p1"><span class="Apple-converted-space">          </span>blackoutDates: [] // ['2025-07-04']</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>},</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{</p>
+<p class="p1"><span class="Apple-converted-space">        </span>id: crypto.randomUUID(),</p>
+<p class="p1"><span class="Apple-converted-space">        </span>slug: 'jax-river',</p>
+<p class="p1"><span class="Apple-converted-space">        </span>name: 'River City Haulers',</p>
+<p class="p1"><span class="Apple-converted-space">        </span>city: 'Jacksonville, FL',</p>
+<p class="p1"><span class="Apple-converted-space">        </span>zones: [</p>
+<p class="p1"><span class="Apple-converted-space">          </span>{ id:'core', name:'Core', travelFee: 35 },</p>
+<p class="p1"><span class="Apple-converted-space">          </span>{ id:'ring', name:'Ring', travelFee: 55 },</p>
+<p class="p1"><span class="Apple-converted-space">          </span>{ id:'far', name:'Far', travelFee: 90 }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>],</p>
+<p class="p1"><span class="Apple-converted-space">        </span>pricing: {</p>
+<p class="p1"><span class="Apple-converted-space">          </span>basePerHourPerMover: 42,</p>
+<p class="p1"><span class="Apple-converted-space">          </span>boxFeeEach: 1.0,</p>
+<p class="p1"><span class="Apple-converted-space">          </span>stairsPerFlight: 9,</p>
+<p class="p1"><span class="Apple-converted-space">          </span>mileageRate: 0.9,</p>
+<p class="p1"><span class="Apple-converted-space">          </span>depositPct: 0.18,</p>
+<p class="p1"><span class="Apple-converted-space">          </span>depositMin: 40,</p>
+<p class="p1"><span class="Apple-converted-space">          </span>depositCap: 250</p>
+<p class="p1"><span class="Apple-converted-space">        </span>},</p>
+<p class="p1"><span class="Apple-converted-space">        </span>addOns: { packing: 35, cleaning: 80, insurance: 30 },</p>
+<p class="p1"><span class="Apple-converted-space">        </span>capacity: { crew: 12, dailyHours: 40 },</p>
+<p class="p1"><span class="Apple-converted-space">        </span>payment: {</p>
+<p class="p1"><span class="Apple-converted-space">          </span>methods: ['Card (test)','Cash','Venmo'],</p>
+<p class="p1"><span class="Apple-converted-space">          </span>requireDeposit: true,</p>
+<p class="p1"><span class="Apple-converted-space">          </span>depositPct: 0.18,</p>
+<p class="p1"><span class="Apple-converted-space">          </span>minDeposit: 40,</p>
+<p class="p1"><span class="Apple-converted-space">          </span>depositCap: 250,</p>
+<p class="p1"><span class="Apple-converted-space">          </span>verifyManual: true,</p>
+<p class="p1"><span class="Apple-converted-space">          </span>holdMinutes: 45</p>
+<p class="p1"><span class="Apple-converted-space">        </span>},</p>
+<p class="p1"><span class="Apple-converted-space">        </span>handles: { venmo: '@RiverCity', cashapp: '$RiverCity', zelle: 'pay@river.local', notes:'Official handles only' },</p>
+<p class="p1"><span class="Apple-converted-space">        </span>ops: {</p>
+<p class="p1"><span class="Apple-converted-space">          </span>lastKnownLocation: null, lastPingAt: null,</p>
+<p class="p1"><span class="Apple-converted-space">          </span>thresholds: { departLead:{core:30,ring:45,far:75}, buffer:20, grace:15, cooldown:30 }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>},</p>
+<p class="p1"><span class="Apple-converted-space">        </span>policies: { floorTotal: 0, maxJobsPerDay: 30, blackoutDates: [] }</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>]);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>const initialState = () =&gt; ({</p>
+<p class="p1"><span class="Apple-converted-space">      </span>providers: defaultProviders(),</p>
+<p class="p1"><span class="Apple-converted-space">      </span>activeProviderId: null,</p>
+<p class="p1"><span class="Apple-converted-space">      </span>publicMode: false,</p>
+<p class="p1"><span class="Apple-converted-space">      </span>cityFilter: 'All',</p>
+<p class="p1"><span class="Apple-converted-space">      </span>view: 'Quote',</p>
+<p class="p1"><span class="Apple-converted-space">      </span>jobs: [],</p>
+<p class="p1"><span class="Apple-converted-space">      </span>feeds: [],</p>
+<p class="p1"><span class="Apple-converted-space">      </span>seedVersion: 0,</p>
+<p class="p1"><span class="Apple-converted-space">      </span>evaluatorOn: true</p>
+<p class="p1"><span class="Apple-converted-space">    </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>let state = DB.load() || initialState();</p>
+<p class="p1"><span class="Apple-converted-space">    </span>if (!state.activeProviderId) state.activeProviderId = state.providers[0].id;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>// Utilities</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const $ = sel =&gt; document.querySelector(sel);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const el = (tag, cls, text) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const n = document.createElement(tag);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>if (cls) n.className = cls;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>if (text !== undefined) n.textContent = text;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>return n;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>};</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const money = n =&gt; `$${Number(n||0).toFixed(2)}`;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const clamp = (v,min,max)=&gt;Math.max(min,Math.min(max,v));</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const todayISO = () =&gt; new Date().toISOString().slice(0,10);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>function sameDay(a,b){</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const d = (t)=&gt; new Date(t);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const x=d(a), y=d(b);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>return x.getFullYear()===y.getFullYear() &amp;&amp; x.getMonth()===y.getMonth() &amp;&amp; x.getDate()===y.getDate();</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>function toast(msg, ms=1800){</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const t = $('#toast');</p>
+<p class="p1"><span class="Apple-converted-space">      </span>t.textContent = msg;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>t.style.display = 'block';</p>
+<p class="p1"><span class="Apple-converted-space">      </span>setTimeout(()=&gt; t.style.display='none', ms);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>function fmtTime(ms){</p>
+<p class="p1"><span class="Apple-converted-space">      </span>if (!ms) return '—';</p>
+<p class="p1"><span class="Apple-converted-space">      </span>try{ return new Date(ms).toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});}catch{return '—'}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>function hash(s){ return [...(s||'')].reduce((a,c)=&gt; (a*31 + c.charCodeAt(0))&gt;&gt;&gt;0, 0); }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>// Distance &amp; zone</p>
+<p class="p1"><span class="Apple-converted-space">    </span>function pseudoDistance(origin, dest) {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const h = s =&gt; [...(s||'')].reduce((a,c)=&gt; (a*31 + c.charCodeAt(0))&gt;&gt;&gt;0, 0);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const ox = (h(origin)+17)%100, oy = (h(origin)+97)%100;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const dx = (h(dest)+53)%100, dy = (h(dest)+199)%100;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const dist = Math.hypot(dx-ox, dy-oy) * 0.35;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>return Math.round(dist*10)/10;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>function zoneFromOrigin(origin, prov){</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const z = prov.zones;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>if (!origin || origin.trim().length &lt; 4) return z[0];</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const h = origin.toLowerCase();</p>
+<p class="p1"><span class="Apple-converted-space">      </span>if (h.includes('oak') || h.includes('nw') || h.includes('ring')) return z[1] || z[0];</p>
+<p class="p1"><span class="Apple-converted-space">      </span>if (h.includes('county') || h.includes('farm') || h.includes('far')) return z[2] || z[0];</p>
+<p class="p1"><span class="Apple-converted-space">      </span>return z[0];</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>function activeProvider(){</p>
+<p class="p1"><span class="Apple-converted-space">      </span>return state.providers.find(p=&gt;p.id===state.activeProviderId) || state.providers[0];</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>// Add-ons &amp; deposit</p>
+<p class="p1"><span class="Apple-converted-space">    </span>function readAddons(){</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const sel = $('#addons');</p>
+<p class="p1"><span class="Apple-converted-space">      </span>return [...sel.selectedOptions].map(o=&gt;o.value);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>function addonTotal(ids, provider){</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const m = provider.addOns || {};</p>
+<p class="p1"><span class="Apple-converted-space">      </span>return (ids||[]).reduce((s,id)=&gt; s + (m[id]||0), 0);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>function calcDeposit(total, provider){</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const p = provider.payment || {};</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const pr = provider.pricing||{};</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const pct = (p.depositPct ?? pr.depositPct ?? 0.2);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const minD = p.minDeposit ?? pr.depositMin ?? 0;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const capD = p.depositCap ?? pr.depositCap ?? Infinity;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const raw = total * pct;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>return clamp(raw, minD, capD);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>// Guardrails</p>
+<p class="p1"><span class="Apple-converted-space">    </span>function isBlackout(dateISO, provider){</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const list = provider.policies?.blackoutDates || [];</p>
+<p class="p1"><span class="Apple-converted-space">      </span>return list.includes(dateISO);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>function maxJobsReached(dateISO, provider){</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const max = provider.policies?.maxJobsPerDay || Infinity;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const count = state.jobs.filter(j=&gt; j.providerId===provider.id &amp;&amp; (j.when||'').slice(0,10)===dateISO).length;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>return count &gt;= max;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>// Pricing engine</p>
+<p class="p1"><span class="Apple-converted-space">    </span>function computeQuote(input, provider){</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const pr = provider.pricing;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const zone = zoneFromOrigin(input.originAddress, provider);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const crew = Number(input.crew||2);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const hours = Number(input.hours||3);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>let base = pr.basePerHourPerMover * crew * hours;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>const stairsFlights = Number(input.originStairs||0) + Number(input.destStairs||0);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const stairsFee = stairsFlights * pr.stairsPerFlight * crew;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>const boxes = Number(input.boxes||0);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const boxFee = boxes * pr.boxFeeEach;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>const siteFee = Number(input.siteFee||0);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>const dist = pseudoDistance(input.originAddress, input.destAddress);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const mileageAddon = dist &gt; 10 ? (dist-10) * pr.mileageRate : 0;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>const travel = zone.travelFee;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const addonsSel = readAddons();</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const addonsFee = addonTotal(addonsSel, provider);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>const fees = travel + stairsFee + mileageAddon + siteFee + boxFee + addonsFee;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>let total = base + fees;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>const floor = provider.policies?.floorTotal || 0;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>if (total &lt; floor) total = floor;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>const deposit = calcDeposit(total, provider);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const depPctEff = Math.round(((provider.payment?.depositPct ?? pr.depositPct) || 0.2)*100);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>return {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>zone, base, travel, stairsFee, mileageAddon,</p>
+<p class="p1"><span class="Apple-converted-space">        </span>boxSite: siteFee + boxFee,</p>
+<p class="p1"><span class="Apple-converted-space">        </span>addonsFee, fees, total, deposit,</p>
+<p class="p1"><span class="Apple-converted-space">        </span>depositPct: depPctEff/100,</p>
+<p class="p1"><span class="Apple-converted-space">        </span>depPctText: `${depPctEff}% (min ${money(provider.payment?.minDeposit ?? pr.depositMin ?? 0)}, cap ${money(provider.payment?.depositCap ?? pr.depositCap ?? Infinity)})`,</p>
+<p class="p1"><span class="Apple-converted-space">        </span>distanceMi: dist,</p>
+<p class="p1"><span class="Apple-converted-space">        </span>addonsSel</p>
+<p class="p1"><span class="Apple-converted-space">      </span>};</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>// Capacity simulation</p>
+<p class="p1"><span class="Apple-converted-space">    </span>function remainingCapacity(provider, jobs){</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const today = todayISO();</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const dayJobs = jobs.filter(j=&gt; (j.when||'').slice(0,10)===today &amp;&amp; j.providerId===provider.id);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const usedHours = dayJobs.reduce((a,j)=&gt; a + Number(j.hours||3) * Number(j.crew||2), 0);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const cap = provider.capacity.dailyHours * provider.capacity.crew;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>return clamp(cap - usedHours, 0, cap);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>// Feeds</p>
+<p class="p1"><span class="Apple-converted-space">    </span>function feed(providerId, msg, level){</p>
+<p class="p1"><span class="Apple-converted-space">      </span>state.feeds.push({ id: crypto.randomUUID(), providerId, at: Date.now(), msg, level });</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>// UI renders</p>
+<p class="p1"><span class="Apple-converted-space">    </span>function renderProviderPill(){</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const prov = activeProvider();</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const pill = $('#providerPill');</p>
+<p class="p1"><span class="Apple-converted-space">      </span>pill.innerHTML = '';</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const wrap = el('div','provider-pill');</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const dot = el('span','badge status','Active');</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const nm = el('span','name',prov.name);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const city = el('span','mini',`• ${prov.city}`);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>wrap.append(nm, city, dot);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>pill.append(wrap);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>pill.onclick = openProviderModal;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>$('#activeSlug').textContent = prov.slug;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>$('#lastPingBadge').textContent = prov.ops?.lastPingAt ? new Date(prov.ops.lastPingAt).toLocaleTimeString() : 'never';</p>
+<p class="p1"><span class="Apple-converted-space">      </span>$('#evalBadge').textContent = state.evaluatorOn ? 'On' : 'Off';</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>function renderCitySeg(){</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const seg = $('#citySeg');</p>
+<p class="p1"><span class="Apple-converted-space">      </span>seg.innerHTML = '';</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const cities = [...new Set(state.providers.map(p=&gt;p.city))];</p>
+<p class="p1"><span class="Apple-converted-space">      </span>['All', ...cities].forEach(c=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const text = c.replace(', FL','');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const b = el('button', state.cityFilter===c?'active':'', text);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>b.onclick = () =&gt; { state.cityFilter = c; saveAndRender(); };</p>
+<p class="p1"><span class="Apple-converted-space">        </span>seg.append(b);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>});</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>function renderViewSeg(){</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const seg = $('#viewSeg');</p>
+<p class="p1"><span class="Apple-converted-space">      </span>seg.innerHTML = '';</p>
+<p class="p1"><span class="Apple-converted-space">      </span>['Quote','Ops','Admin'].forEach(name=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const b = el('button', state.view===name?'active':'', name);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>b.onclick = ()=&gt; { state.view = name; saveAndRender(); };</p>
+<p class="p1"><span class="Apple-converted-space">        </span>seg.append(b);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>});</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>function renderZoneTabs(){</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const prov = activeProvider();</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const tabs = $('#zoneTabs');</p>
+<p class="p1"><span class="Apple-converted-space">      </span>tabs.innerHTML = '';</p>
+<p class="p1"><span class="Apple-converted-space">      </span>prov.zones.forEach(z=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const t = el('span','tab', `${z.name} • ${money(z.travelFee)}`);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>tabs.append(t);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>});</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const note = el('span','note','Pricing based on origin zone • No hidden fees');</p>
+<p class="p1"><span class="Apple-converted-space">      </span>note.style.marginLeft = '8px';</p>
+<p class="p1"><span class="Apple-converted-space">      </span>tabs.append(note);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>function readQuoteInputs(){</p>
+<p class="p1"><span class="Apple-converted-space">      </span>return {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>service: $('#service').value,</p>
+<p class="p1"><span class="Apple-converted-space">        </span>when: $('#when').value,</p>
+<p class="p1"><span class="Apple-converted-space">        </span>originAddress: $('#originAddress').value,</p>
+<p class="p1"><span class="Apple-converted-space">        </span>originStairs: $('#originStairs').value,</p>
+<p class="p1"><span class="Apple-converted-space">        </span>destAddress: $('#destAddress').value,</p>
+<p class="p1"><span class="Apple-converted-space">        </span>destStairs: $('#destStairs').value,</p>
+<p class="p1"><span class="Apple-converted-space">        </span>siteFee: $('#siteFee').value,</p>
+<p class="p1"><span class="Apple-converted-space">        </span>crew: $('#crew').value,</p>
+<p class="p1"><span class="Apple-converted-space">        </span>hours: $('#hours').value,</p>
+<p class="p1"><span class="Apple-converted-space">        </span>boxes: $('#boxes').value,</p>
+<p class="p1"><span class="Apple-converted-space">        </span>addons: readAddons(),</p>
+<p class="p1"><span class="Apple-converted-space">        </span>custName: $('#custName').value,</p>
+<p class="p1"><span class="Apple-converted-space">        </span>custPhone: $('#custPhone').value,</p>
+<p class="p1"><span class="Apple-converted-space">        </span>custEmail: $('#custEmail').value,</p>
+<p class="p1"><span class="Apple-converted-space">        </span>custNotes: $('#custNotes').value</p>
+<p class="p1"><span class="Apple-converted-space">      </span>};</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>function renderQuote(){</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const prov = activeProvider();</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const inp = readQuoteInputs();</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>// Guardrail checks for display</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const dateISO = (inp.when||'').slice(0,10);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>if (dateISO &amp;&amp; isBlackout(dateISO, prov)){</p>
+<p class="p1"><span class="Apple-converted-space">        </span>$('#custStatus').textContent = 'Blackout';</p>
+<p class="p1"><span class="Apple-converted-space">        </span>$('#custStatus').classList.add('danger');</p>
+<p class="p1"><span class="Apple-converted-space">      </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>$('#custStatus').textContent = 'Draft';</p>
+<p class="p1"><span class="Apple-converted-space">        </span>$('#custStatus').classList.remove('danger');</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>const q = computeQuote(inp, prov);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>// KPI</p>
+<p class="p1"><span class="Apple-converted-space">      </span>$('#zoneName').textContent = q.zone.name;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>$('#distMi').textContent = `${q.distanceMi.toFixed(1)} mi`;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>$('#etaConf').textContent = q.distanceMi &gt; 25 ? 'Low' : (q.distanceMi &gt; 12 ? 'Medium' : 'High');</p>
+<p class="p1"><span class="Apple-converted-space">      </span>$('#kBase').textContent = money(q.base);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>$('#kFees').textContent = money(q.fees);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>$('#kDeposit').textContent = money(q.deposit);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>$('#kTotal').textContent = money(q.total);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>// Breakdown</p>
+<p class="p1"><span class="Apple-converted-space">      </span>$('#bdBase').textContent = money(q.base);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>$('#bdZoneFees').textContent = money(q.travel);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>$('#bdStairs').textContent = money(q.stairsFee);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>$('#bdMileage').textContent = money(q.mileageAddon);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>$('#bdSiteBoxes').textContent = money(q.boxSite);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>$('#bdAddons').textContent = money(q.addonsFee);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>$('#bdDepPct').textContent = `${Math.round(q.depositPct*100)}% • ${q.depPctText}`;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>// Customer preview</p>
+<p class="p1"><span class="Apple-converted-space">      </span>$('#custTotal').textContent = money(q.total);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>$('#custDeposit').textContent = money(q.deposit);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>$('#custConf').textContent = $('#etaConf').textContent;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>$('#custTrip').textContent = `${inp.originAddress || 'Origin?'} <span class="s1">→</span> ${inp.destAddress || 'Destination?'}`;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>$('#custStairs').textContent = `Stairs: O${inp.originStairs||0} + D${inp.destStairs||0}`;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>$('#custAddons').textContent = `Add-ons: ${(q.addonsSel &amp;&amp; q.addonsSel.length)? q.addonsSel.join(', '): 'None'}`;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>$('#custDepositNote').textContent = `Deposit: ${q.depPctText}`;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>$('#custContact').textContent = `Contact: ${inp.custName||'—'} • ${inp.custPhone||'—'} • ${inp.custEmail||'—'}`;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>$('#dueNow').textContent = money(q.deposit);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>// Capacity</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const rem = remainingCapacity(prov, state.jobs);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>$('#capBadge').textContent = `${rem} crew-hrs`;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>function renderCalendar(){</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const cal = $('#calendar');</p>
+<p class="p1"><span class="Apple-converted-space">      </span>cal.innerHTML = '';</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const start = new Date();</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const days = [...Array(7)].map((_,i)=&gt; new Date(start.getFullYear(), start.getMonth(), start.getDate()+i));</p>
+<p class="p1"><span class="Apple-converted-space">      </span>days.forEach(d=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const cell = el('div','day');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const label = el('div','d', d.toLocaleDateString(undefined,{weekday:'short', month:'short', day:'numeric'}));</p>
+<p class="p1"><span class="Apple-converted-space">        </span>cell.append(label);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const jobs = state.jobs.filter(j =&gt; j.providerId===state.activeProviderId &amp;&amp; (j.when||'').slice(0,10) === d.toISOString().slice(0,10));</p>
+<p class="p1"><span class="Apple-converted-space">        </span>jobs.forEach(j=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">          </span>const jb = el('div','job');</p>
+<p class="p1"><span class="Apple-converted-space">          </span>const stairIcon = '<span class="s1">⇧</span>'.repeat(Math.max(1, (Number(j.originStairs)+Number(j.destStairs))||0)).slice(0,3);</p>
+<p class="p1"><span class="Apple-converted-space">          </span>const riskDot = el('span','risk-dot ' + (j.risk?.level==='late'?'risk-late': j.risk?.level==='warn'?'risk-warn':'risk-ok'));</p>
+<p class="p1"><span class="Apple-converted-space">          </span>const route = el('div','route', `${j.pickup||'Origin'} <span class="s1">→</span> ${j.dropoff||'Dest'}`);</p>
+<p class="p1"><span class="Apple-converted-space">          </span>route.append(riskDot);</p>
+<p class="p1"><span class="Apple-converted-space">          </span>jb.append(</p>
+<p class="p1"><span class="Apple-converted-space">            </span>route,</p>
+<p class="p1"><span class="Apple-converted-space">            </span>el('div','meta', `${j.crew} crew • ${j.hours}h • ${j.zoneName}`),</p>
+<p class="p1"><span class="Apple-converted-space">            </span>el('div','meta', `<span class="s1">⇧</span> ${stairIcon} • ${money(j.total)} • depart by ${fmtTime(j.timing?.departBy)}`)</p>
+<p class="p1"><span class="Apple-converted-space">          </span>);</p>
+<p class="p1"><span class="Apple-converted-space">          </span>cell.append(jb);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>});</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const cap = remainingCapacity(activeProvider(), state.jobs.filter(j=&gt; (j.when||'').slice(0,10)===d.toISOString().slice(0,10)));</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const capEl = el('div','cap', `Remaining: ${cap} crew-hrs`);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>cell.append(capEl);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>cal.append(cell);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>});</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>function renderJobs(){</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const list = $('#jobsList');</p>
+<p class="p1"><span class="Apple-converted-space">      </span>list.innerHTML = '';</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const prov = activeProvider();</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const filterCity = state.cityFilter;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const jobs = state.jobs.filter(j=&gt; j.providerId===prov.id &amp;&amp; (filterCity==='All' || prov.city===filterCity));</p>
+<p class="p1"><span class="Apple-converted-space">      </span>if (jobs.length===0){</p>
+<p class="p1"><span class="Apple-converted-space">        </span>list.append(el('div','mini','No jobs yet. Create a hold or book to populate.'));</p>
+<p class="p1"><span class="Apple-converted-space">        </span>return;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>jobs.slice().reverse().forEach(j=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const item = el('div','job');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const stairStr = `O${j.originStairs}+D${j.destStairs}`;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const riskDot = el('span','risk-dot ' + (j.risk?.level==='late'?'risk-late': j.risk?.level==='warn'?'risk-warn':'risk-ok'));</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const etaText = j.timing?.etaMin!=null ? `ETA ${Math.round(j.timing.etaMin)}m` : 'ETA —';</p>
+<p class="p1"><span class="Apple-converted-space">        </span>item.append(</p>
+<p class="p1"><span class="Apple-converted-space">          </span>el('div','route', `${j.pickup} <span class="s1">→</span> ${j.dropoff}`),</p>
+<p class="p1"><span class="Apple-converted-space">          </span>el('div','meta', `${j.crew} crew • ${j.hours}h • ${j.zoneName} • ${stairStr}`),</p>
+<p class="p1"><span class="Apple-converted-space">          </span>el('div','meta', `${new Date(j.when).toLocaleString()} • ${money(j.total)} • ${j.status} • depart by ${fmtTime(j.timing?.departBy)}`)</p>
+<p class="p1"><span class="Apple-converted-space">        </span>);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>item.querySelector('.route').append(riskDot);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const etaRow = el('div','meta', etaText);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const contactRow = el('div','meta', `Cust: ${j.customer?.name||'—'} • ${j.customer?.phone||'—'} • ${j.customer?.email||'—'}`);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>item.append(etaRow, contactRow);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>list.append(item);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>});</p>
+<p class="p1"><span class="Apple-converted-space">      </span>renderQueues();</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>function renderFeed(){</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const feed = $('#ownerFeed');</p>
+<p class="p1"><span class="Apple-converted-space">      </span>feed.innerHTML = '';</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const prov = activeProvider();</p>
+<p class="p1"><span class="Apple-converted-space">      </span>state.feeds.filter(f=&gt; f.providerId===prov.id).slice(-120).reverse().forEach(f=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const e = el('div','evt');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const level = f.level ? ` [${f.level}]` : '';</p>
+<p class="p1"><span class="Apple-converted-space">        </span>e.textContent = `[${new Date(f.at).toLocaleTimeString()}]${level} ${f.msg}`;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>feed.append(e);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>});</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>function renderQueues(){</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const show = $('#queueToggle').checked;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>$('#verifyList').style.display = show? '' : 'none';</p>
+<p class="p1"><span class="Apple-converted-space">      </span>$('#balancesList').style.display = show? '' : 'none';</p>
+<p class="p1"><span class="Apple-converted-space">      </span>if (!show) return;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>const prov = activeProvider();</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const verify = state.jobs.filter(j=&gt; j.providerId===prov.id &amp;&amp; j.status==='Hold:Unverified');</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const bal = state.jobs.filter(j=&gt; j.providerId===prov.id &amp;&amp; j.status==='Booked' &amp;&amp; sameDay(j.when, new Date()));</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>const vList = $('#verifyList'); vList.innerHTML='';</p>
+<p class="p1"><span class="Apple-converted-space">      </span>if (verify.length===0) vList.append(el('div','mini','No deposits pending verification.'));</p>
+<p class="p1"><span class="Apple-converted-space">      </span>verify.forEach(j=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const row = el('div','job');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>row.append(</p>
+<p class="p1"><span class="Apple-converted-space">          </span>el('div','route', `${j.pickup} <span class="s1">→</span> ${j.dropoff}`),</p>
+<p class="p1"><span class="Apple-converted-space">          </span>el('div','meta', `Hold expires ${fmtTime(j.hold?.expiresAt)} • Deposit ${money(j.deposit)}`)</p>
+<p class="p1"><span class="Apple-converted-space">        </span>);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const act = el('div','inline-actions');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const bV = el('button','btn ok','Verify');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>bV.onclick = ()=&gt; verifyDeposit(j.id);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const bC = el('button','btn warn','Cancel');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>bC.onclick = ()=&gt; cancelHold(j.id);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>act.append(bV,bC);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>row.append(act);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>vList.append(row);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>const bList = $('#balancesList'); bList.innerHTML='';</p>
+<p class="p1"><span class="Apple-converted-space">      </span>if (bal.length===0) bList.append(el('div','mini','No balances due today.'));</p>
+<p class="p1"><span class="Apple-converted-space">      </span>bal.forEach(j=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const row = el('div','job');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>row.append(</p>
+<p class="p1"><span class="Apple-converted-space">          </span>el('div','route', `${j.pickup} <span class="s1">→</span> ${j.dropoff}`),</p>
+<p class="p1"><span class="Apple-converted-space">          </span>el('div','meta', `Remaining ${money(Math.max(0, j.total - (j.paidAmount||0)))} • Window ${new Date(j.when).toLocaleTimeString()}`)</p>
+<p class="p1"><span class="Apple-converted-space">        </span>);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const act = el('div','inline-actions');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const done = el('button','btn ok','Mark collected');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>done.onclick = ()=&gt; markCompleted(j.id);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>act.append(done);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>row.append(act);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>bList.append(row);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>});</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>function renderAdmin(){</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const prov = activeProvider();</p>
+<p class="p1"><span class="Apple-converted-space">      </span>// Pricing inputs</p>
+<p class="p1"><span class="Apple-converted-space">      </span>$('#admBase').value = prov.pricing.basePerHourPerMover;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>$('#admStairs').value = prov.pricing.stairsPerFlight;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>$('#admBox').value = prov.pricing.boxFeeEach;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>$('#admMileage').value = prov.pricing.mileageRate;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>$('#admDepPct').value = prov.payment?.depositPct ?? prov.pricing.depositPct ?? 0.2;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>$('#admDepMin').value = prov.payment?.minDeposit ?? prov.pricing.depositMin ?? 0;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>$('#admDepCap').value = prov.payment?.depositCap ?? prov.pricing.depositCap ?? 999;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>$('#admDailyHrs').value = prov.capacity.dailyHours;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>$('#admCrew').value = prov.capacity.crew;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>// Payment methods/handles</p>
+<p class="p1"><span class="Apple-converted-space">      </span>$('#admPayMethods').value = (prov.payment?.methods||[]).join(',');</p>
+<p class="p1"><span class="Apple-converted-space">      </span>$('#admHoldMin').value = prov.payment?.holdMinutes ?? 60;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>$('#admVenmo').value = prov.handles?.venmo || '';</p>
+<p class="p1"><span class="Apple-converted-space">      </span>$('#admCash').value = prov.handles?.cashapp || '';</p>
+<p class="p1"><span class="Apple-converted-space">      </span>$('#admZelle').value = prov.handles?.zelle || '';</p>
+<p class="p1"><span class="Apple-converted-space">      </span>// Guardrails</p>
+<p class="p1"><span class="Apple-converted-space">      </span>$('#admFloor').value = prov.policies?.floorTotal ?? 0;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>$('#admMaxJobs').value = prov.policies?.maxJobsPerDay ?? 20;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>$('#admBlackouts').value = (prov.policies?.blackoutDates||[]).join(',');</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>// Analytics</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const jobs = state.jobs.filter(j=&gt; j.providerId===prov.id);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const totalRev = jobs.reduce((s,j)=&gt; s + (j.total||0), 0);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const depCollected = jobs.reduce((s,j)=&gt; s + (j.paidAmount||0), 0);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const todayJobs = jobs.filter(j=&gt; sameDay(j.when, new Date())).length;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const anl = $('#admAnalytics');</p>
+<p class="p1"><span class="Apple-converted-space">      </span>anl.innerHTML = `</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="row"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="col-6"&gt;&lt;div class="k"&gt;&lt;div class="mini"&gt;Gross scheduled&lt;/div&gt;&lt;div class="v"&gt;${money(totalRev)}&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="col-6"&gt;&lt;div class="k"&gt;&lt;div class="mini"&gt;Deposits collected&lt;/div&gt;&lt;div class="v"&gt;${money(depCollected)}&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="col-6"&gt;&lt;div class="k"&gt;&lt;div class="mini"&gt;Jobs today&lt;/div&gt;&lt;div class="v"&gt;${todayJobs}&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="col-6"&gt;&lt;div class="k"&gt;&lt;div class="mini"&gt;Capacity today (crew-hrs left)&lt;/div&gt;&lt;div class="v"&gt;${remainingCapacity(prov, state.jobs)}&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>`;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>function saveAndRender(){</p>
+<p class="p1"><span class="Apple-converted-space">      </span>DB.save(state);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>renderAll();</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>function renderAll(){</p>
+<p class="p1"><span class="Apple-converted-space">      </span>renderProviderPill();</p>
+<p class="p1"><span class="Apple-converted-space">      </span>renderCitySeg();</p>
+<p class="p1"><span class="Apple-converted-space">      </span>renderViewSeg();</p>
+<p class="p1"><span class="Apple-converted-space">      </span>renderZoneTabs();</p>
+<p class="p1"><span class="Apple-converted-space">      </span>renderQuote();</p>
+<p class="p1"><span class="Apple-converted-space">      </span>renderCalendar();</p>
+<p class="p1"><span class="Apple-converted-space">      </span>renderJobs();</p>
+<p class="p1"><span class="Apple-converted-space">      </span>renderFeed();</p>
+<p class="p1"><span class="Apple-converted-space">      </span>renderAdmin();</p>
+<p class="p1"><span class="Apple-converted-space">      </span>$('#publicBadge').textContent = state.publicMode ? 'On' : 'Off';</p>
+<p class="p1"><span class="Apple-converted-space">      </span>// Views</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const showQuote = state.view==='Quote';</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const showOps = state.view!=='Admin';</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const adminPanel = $('#adminPanel');</p>
+<p class="p1"><span class="Apple-converted-space">      </span>$('#appGrid').style.display = showQuote? '' : 'none';</p>
+<p class="p1"><span class="Apple-converted-space">      </span>$('.grid-ops').style.display = showOps? '' : 'none';</p>
+<p class="p1"><span class="Apple-converted-space">      </span>adminPanel.style.display = state.view==='Admin'? '' : 'none';</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>// Booking / Hold creation with guardrails and customer fields</p>
+<p class="p1"><span class="Apple-converted-space">    </span>function createJob({status, paidAmount=0, manual=false}){</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const prov = activeProvider();</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const inp = readQuoteInputs();</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>// Guardrails</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const dateISO = (inp.when || new Date().toISOString()).slice(0,10);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>if (isBlackout(dateISO, prov)){</p>
+<p class="p1"><span class="Apple-converted-space">        </span>toast('Cannot book: blackout date');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>feed(prov.id, `Booking blocked by blackout date ${dateISO}`, 'warn');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>return null;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>if (maxJobsReached(dateISO, prov)){</p>
+<p class="p1"><span class="Apple-converted-space">        </span>toast('Cannot book: max jobs reached for date');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>feed(prov.id, `Booking blocked: max jobs reached for ${dateISO}`, 'warn');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>return null;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>const q = computeQuote(inp, prov);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const whenIso = inp.when || new Date().toISOString();</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const job = {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>id: crypto.randomUUID(),</p>
+<p class="p1"><span class="Apple-converted-space">        </span>providerId: prov.id,</p>
+<p class="p1"><span class="Apple-converted-space">        </span>providerSlug: prov.slug,</p>
+<p class="p1"><span class="Apple-converted-space">        </span>service: inp.service,</p>
+<p class="p1"><span class="Apple-converted-space">        </span>when: whenIso,</p>
+<p class="p1"><span class="Apple-converted-space">        </span>pickup: inp.originAddress || 'Origin',</p>
+<p class="p1"><span class="Apple-converted-space">        </span>dropoff: inp.destAddress || 'Destination',</p>
+<p class="p1"><span class="Apple-converted-space">        </span>originStairs: Number(inp.originStairs||0),</p>
+<p class="p1"><span class="Apple-converted-space">        </span>destStairs: Number(inp.destStairs||0),</p>
+<p class="p1"><span class="Apple-converted-space">        </span>siteFee: Number(inp.siteFee||0),</p>
+<p class="p1"><span class="Apple-converted-space">        </span>crew: Number(inp.crew||2),</p>
+<p class="p1"><span class="Apple-converted-space">        </span>hours: Number(inp.hours||3),</p>
+<p class="p1"><span class="Apple-converted-space">        </span>boxes: Number(inp.boxes||0),</p>
+<p class="p1"><span class="Apple-converted-space">        </span>addons: q.addonsSel,</p>
+<p class="p1"><span class="Apple-converted-space">        </span>zoneId: q.zone.id, zoneName: q.zone.name,</p>
+<p class="p1"><span class="Apple-converted-space">        </span>distanceMi: q.distanceMi,</p>
+<p class="p1"><span class="Apple-converted-space">        </span>base: q.base, fees: q.fees, total: q.total,</p>
+<p class="p1"><span class="Apple-converted-space">        </span>deposit: q.deposit, depositPct: q.depositPct,</p>
+<p class="p1"><span class="Apple-converted-space">        </span>status,</p>
+<p class="p1"><span class="Apple-converted-space">        </span>paidAmount,</p>
+<p class="p1"><span class="Apple-converted-space">        </span>pay: { method: manual? 'Manual' : (paidAmount&gt;0?'Card (test)': null) },</p>
+<p class="p1"><span class="Apple-converted-space">        </span>hold: holdInfo(prov),</p>
+<p class="p1"><span class="Apple-converted-space">        </span>timing: makeTiming(prov, q, whenIso),</p>
+<p class="p1"><span class="Apple-converted-space">        </span>risk: { level:'ok', lastAlertAt:null },</p>
+<p class="p1"><span class="Apple-converted-space">        </span>customer: {</p>
+<p class="p1"><span class="Apple-converted-space">          </span>name: inp.custName || '',</p>
+<p class="p1"><span class="Apple-converted-space">          </span>phone: inp.custPhone || '',</p>
+<p class="p1"><span class="Apple-converted-space">          </span>email: inp.custEmail || '',</p>
+<p class="p1"><span class="Apple-converted-space">          </span>notes: inp.custNotes || ''</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>};</p>
+<p class="p1"><span class="Apple-converted-space">      </span>state.jobs.push(job);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>feed(prov.id, `${status}: ${job.pickup} <span class="s1">→</span> ${job.dropoff} • ${money(job.total)}`);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>saveAndRender();</p>
+<p class="p1"><span class="Apple-converted-space">      </span>return job;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>function holdInfo(prov){</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const mins = prov.payment?.holdMinutes ?? 60;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const expiresAt = Date.now() + mins*60*1000;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>return { expiresAt };</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>function makeTiming(prov, quote, whenIso){</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const startMs = new Date(whenIso).getTime();</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const zone = quote.zone.id;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const speeds = { core:1.5, ring:2.0, far:2.5 }; // min per mile</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const estTravelMin = Math.max(5, Math.round((quote.distanceMi||0) * (speeds[zone] || 2.0)));</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const buffer = prov.ops?.thresholds?.buffer ?? 20;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const departBy = startMs - (estTravelMin + buffer)*60*1000;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>return { departBy, estTravelMin, etaMin:null };</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>// Queue actions</p>
+<p class="p1"><span class="Apple-converted-space">    </span>function verifyDeposit(jobId){</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const j = state.jobs.find(x=&gt;x.id===jobId);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>if (!j) return;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>j.status = 'Booked';</p>
+<p class="p1"><span class="Apple-converted-space">      </span>j.paidAmount = j.deposit;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>feed(j.providerId, `Deposit verified: ${money(j.deposit)} • ${j.pickup}`, 'info');</p>
+<p class="p1"><span class="Apple-converted-space">      </span>saveAndRender();</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>function cancelHold(jobId){</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const idx = state.jobs.findIndex(x=&gt;x.id===jobId);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>if (idx&lt;0) return;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const j = state.jobs[idx];</p>
+<p class="p1"><span class="Apple-converted-space">      </span>state.jobs.splice(idx,1);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>feed(j.providerId, `Hold canceled/expired • ${j.pickup}`, 'warn');</p>
+<p class="p1"><span class="Apple-converted-space">      </span>saveAndRender();</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>function markCompleted(jobId){</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const j = state.jobs.find(x=&gt;x.id===jobId);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>if (!j) return;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>j.status = 'Completed';</p>
+<p class="p1"><span class="Apple-converted-space">      </span>feed(j.providerId, `Completed • Balance collected • ${j.pickup}`, 'info');</p>
+<p class="p1"><span class="Apple-converted-space">      </span>saveAndRender();</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>// Seeds</p>
+<p class="p1"><span class="Apple-converted-space">    </span>function seedScenario(){</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const prov = activeProvider();</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const today = new Date();</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const at = (o,h)=&gt; new Date(today.getFullYear(), today.getMonth(), today.getDate()+o, h, 0, 0).toISOString();</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const samples = [</p>
+<p class="p1"><span class="Apple-converted-space">        </span>{o:'120 Oak St, Core', d:'55 Maple Ave', os:1, ds:0, crew:2, h:3, when: at(0, new Date().getHours()+2)},</p>
+<p class="p1"><span class="Apple-converted-space">        </span>{o:'777 County Rd, Far', d:'22 Lake View', os:2, ds:1, crew:3, h:4, when: at(1, 10)},</p>
+<p class="p1"><span class="Apple-converted-space">        </span>{o:'19 NW 18th St, Ring', d:'233 Pine Blvd', os:0, ds:2, crew:2, h:2, when: at(2, 11)}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>];</p>
+<p class="p1"><span class="Apple-converted-space">      </span>samples.forEach((s,i)=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const calc = computeQuote({</p>
+<p class="p1"><span class="Apple-converted-space">          </span>originAddress:s.o, destAddress:s.d,</p>
+<p class="p1"><span class="Apple-converted-space">          </span>originStairs:s.os, destStairs:s.ds,</p>
+<p class="p1"><span class="Apple-converted-space">          </span>siteFee:0, crew:s.crew, hours:s.h, boxes:10, service:'Pack &amp; Load', when:s.when</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}, prov);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const status = i===0 ? 'Hold:Unverified' : 'Booked';</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const paid = status==='Booked' ? calc.deposit : 0;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>state.jobs.push({</p>
+<p class="p1"><span class="Apple-converted-space">          </span>id: crypto.randomUUID(),</p>
+<p class="p1"><span class="Apple-converted-space">          </span>providerId: prov.id,</p>
+<p class="p1"><span class="Apple-converted-space">          </span>providerSlug: prov.slug,</p>
+<p class="p1"><span class="Apple-converted-space">          </span>service: 'Pack &amp; Load',</p>
+<p class="p1"><span class="Apple-converted-space">          </span>when: s.when,</p>
+<p class="p1"><span class="Apple-converted-space">          </span>pickup: s.o, dropoff: s.d,</p>
+<p class="p1"><span class="Apple-converted-space">          </span>originStairs: s.os, destStairs: s.ds,</p>
+<p class="p1"><span class="Apple-converted-space">          </span>siteFee: 0, crew: s.crew, hours: s.h, boxes:10,</p>
+<p class="p1"><span class="Apple-converted-space">          </span>addons: i===0?['insurance']:[],</p>
+<p class="p1"><span class="Apple-converted-space">          </span>zoneId: calc.zone.id, zoneName: calc.zone.name,</p>
+<p class="p1"><span class="Apple-converted-space">          </span>distanceMi: calc.distanceMi,</p>
+<p class="p1"><span class="Apple-converted-space">          </span>base: calc.base, fees: calc.fees, total: calc.total,</p>
+<p class="p1"><span class="Apple-converted-space">          </span>deposit: calc.deposit, depositPct: calc.depositPct,</p>
+<p class="p1"><span class="Apple-converted-space">          </span>status, paidAmount: paid,</p>
+<p class="p1"><span class="Apple-converted-space">          </span>hold: holdInfo(prov),</p>
+<p class="p1"><span class="Apple-converted-space">          </span>timing: makeTiming(prov, calc, s.when),</p>
+<p class="p1"><span class="Apple-converted-space">          </span>risk: { level:'ok', lastAlertAt:null },</p>
+<p class="p1"><span class="Apple-converted-space">          </span>customer: { name:'Seed User', phone:'555-0100', email:'seed@example.local', notes:'' }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>});</p>
+<p class="p1"><span class="Apple-converted-space">      </span>});</p>
+<p class="p1"><span class="Apple-converted-space">      </span>feed(prov.id, 'Seed scenario created • includes near-term job for alert demo');</p>
+<p class="p1"><span class="Apple-converted-space">      </span>saveAndRender();</p>
+<p class="p1"><span class="Apple-converted-space">      </span>toast('Seeded jobs &amp; alerts demo');</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>// Provider modal</p>
+<p class="p1"><span class="Apple-converted-space">    </span>function openProviderModal</p>
+</body>
+</html>
